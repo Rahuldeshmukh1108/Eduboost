@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multilingual AI Tutor</title>
+    <link rel="stylesheet" href="../Css/multimodel.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../Css/conversationHistory.css">
+    <!-- Add PDF.js library -->
+    <script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@3.4.120/build/pdf.min.js"></script>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Main Chat Interface -->
+        <div id="chat-container" class="chat-container">
+            <!-- Sidebar -->
+            <div class="sidebar">
+                <div class="sidebar-header">
+                    <h2>AI Tutor</h2>
+                    <button id="sidebar-toggle" class="sidebar-toggle">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+                <div class="sidebar-content">
+                    <!-- New Chat Button -->
+                    <div class="new-chat-container">
+                        <button id="new-chat-button" class="new-chat-button">
+                            <i class="fas fa-plus"></i> New Chat
+                        </button>
+                    </div>
+                    
+                    <div class="conversation-history">
+                        <h3>Conversation History</h3>
+                        <ul id="history-list" class="history-list">
+                            <!-- Example of a conversation item with actions -->
+                            <!-- This will be dynamically generated -->
+                            
+                            <li class="history-item">
+                                Conversation Title
+                                <div class="message-actions">
+                                    <button class="delete-conversation-button" title="Delete">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main Chat Area -->
+            <div class="chat-area">
+                <div class="chat-header">
+                    <button id="mobile-sidebar-toggle" class="mobile-sidebar-toggle">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <h2>AI Tutor Chat</h2>
+                    <div class="chat-actions">
+                        <div class="settings">
+                            <button id="settings-icon" class="settings-icon chic-icon" title="Settings">
+                                <i class="fas fa-cog"></i>
+                            </button>
+                            <div id="settings-dropdown" class="settings-dropdown chic-dropdown hidden">
+                                <div class="setting-item">
+                                    <label for="language-select">Language:</label>
+                                    <select id="language-select" class="setting-select">
+                                      <option value="en">English</option>
+                                      <option value="es">Español</option>
+                                      <option value="fr">Français</option>
+                                      <option value="de">Deutsch</option>
+                                      <option value="hi">हिन्दी</option>
+                                      <option value="mr">मराठी</option>
+                                      <option value="gu">ગુજરાતી</option>
+                                      <option value="ta">தமிழ்</option>
+                                      <option value="ml">മലയാളം</option>
+                                      <option value="zh">中文</option>
+                                      <option value="ja">日本語</option>
+                                      <option value="ar">العربية</option>
+                                      <option value="ru">Русский</option>
+                                    </select>
+                                  </div>
+                                <div class="setting-item chic-item">
+                                    <label for="model-select" class="chic-label">AI Model:</label>
+                                    <select id="model-select" class="chic-select">
+                                        
+                                        <option value="llama-3.1-8b-instant">Llama 3.1 8B</option>
+                                        
+                                    </select>
+                                </div>
+                                <div class="setting-item chic-item">
+                                    <label for="theme-toggle" class="chic-label">Dark Mode:</label>
+                                    <label class="switch chic-switch">
+                                        <input type="checkbox" id="theme-toggle">
+                                        <span class="slider round"></span>
+                                    </label>
+                                </div>
+                                <div class="setting-item chic-item">
+                                    <label for="voice-toggle" class="chic-label">Text-to-Speech:</label>
+                                    <label class="switch chic-switch">
+                                        <input type="checkbox" id="voice-toggle">
+                                        <span class="slider round"></span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <button id="user-profile-button" class="action-button" title="User Profile">
+                            <img src="https://via.placeholder.com/32" alt="User Profile" class="profile-picture">
+                        </button>    
+                    </div>
+                </div>
+                <div id="chat-messages" class="chat-messages">
+                    <div class="message bot-message">
+                        <div class="message-avatar">
+                            <i class="fas fa-robot"></i>
+                        </div>
+                        <div class="message-content">
+                            <p>Hello! I'm your AI Tutor. I can help you learn about any subject. You can ask me questions, upload files, or even send me images and audio. How can I assist you today?</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="chat-input-area">
+                    <div class="file-upload-container">
+                        <button id="file-upload-button" class="file-upload-button" title="Upload Files">
+                            <i class="fas fa-paperclip"></i>
+                        </button>
+                        <div id="file-upload-options" class="file-upload-options hidden">
+                            <label class="file-option">
+                                <i class="fas fa-file-pdf"></i> PDF
+                                <input type="file" id="pdf-upload" accept=".pdf" hidden>
+                            </label>
+                            <label class="file-option">
+                                <i class="fas fa-file-word"></i> Document
+                                <input type="file" id="doc-upload" accept=".doc,.docx,.txt" hidden>
+                            </label>
+                            <label class="file-option">
+                                <i class="fas fa-image"></i> Image
+                                <input type="file" id="image-upload" accept="image/*" hidden>
+                            </label>
+                            <label class="file-option">
+                                <i class="fas fa-microphone"></i> Audio
+                                <input type="file" id="audio-upload" accept="audio/*" hidden>
+                            </label>
+                        </div>
+                    </div>
+                    <textarea id="user-input" placeholder="Type your message here..." rows="1"></textarea>
+                    <button id="voice-input-button" class="voice-input-button" title="Voice Input">
+                        <i class="fas fa-microphone"></i>
+                    </button>
+                    <button id="send-button" class="send-button" title="Send Message">
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </div>
+                <div id="file-preview-container" class="file-preview-container hidden">
+                    <div class="file-preview-header">
+                        <h3>File Preview</h3>
+                        <button id="close-preview" class="close-preview">×</button>
+                    </div>
+                    <div id="file-preview-content" class="file-preview-content"></div>
+                </div>
+                
+                <!-- Add this in the body section, before the closing body tag -->
+<div class="file-preview-container hidden" id="file-preview-container">
+    <div class="file-preview-header">
+      <h3>File Preview</h3>
+      <button id="close-preview" class="close-preview"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="file-preview-content" id="file-preview-content"></div>
+  </div>
+  
+  <!-- File upload options -->
+  <div class="file-upload-options hidden" id="file-upload-options">
+    <div class="file-option" id="pdf-option">
+      <i class="fas fa-file-pdf"></i> PDF
+      <input type="file" id="pdf-upload" accept=".pdf" hidden>
+    </div>
+    <div class="file-option" id="doc-option">
+      <i class="fas fa-file-word"></i> Document
+      <input type="file" id="doc-upload" accept=".doc,.docx,.txt" hidden>
+    </div>
+    <div class="file-option" id="image-option">
+      <i class="fas fa-image"></i> Image
+      <input type="file" id="image-upload" accept="image/*" hidden>
+    </div>
+    <div class="file-option" id="audio-option">
+      <i class="fas fa-music"></i> Audio
+      <input type="file" id="audio-upload" accept="audio/*" hidden>
+    </div>
+  </div>
+  
+  <!-- Audio recording container -->
+  <div class="audio-recording-container hidden" id="audio-recording-container">
+    <div class="audio-recording-header">
+      <h3>Audio Recording</h3>
+      <button id="close-audio-recording" class="close-preview"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="audio-recording-content">
+      <div id="audio-visualizer" class="audio-visualizer"></div>
+      <div class="audio-timer">00:00</div>
+      <div class="audio-controls">
+        <button id="start-recording" class="audio-control-button"><i class="fas fa-microphone"></i> Start</button>
+        <button id="stop-recording" class="audio-control-button" disabled><i class="fas fa-stop"></i> Stop</button>
+      </div>
+      <div id="audio-playback-container" class="audio-playback-container hidden">
+        <audio id="audio-playback" controls></audio>
+        <button id="send-audio" class="audio-control-button"><i class="fas fa-paper-plane"></i> Send</button>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Loading overlay -->
+  <div class="loading-overlay hidden" id="loading-overlay">
+    <div class="spinner"></div>
+    <p id="loading-text">Processing...</p>
+  </div>
+
+    <!-- Scripts -->
+    <!-- Load Tesseract.js -->
+    <script src="https://cdn.jsdelivr.net/npm/tesseract.js@4.1.1/dist/tesseract.min.js"></script>
+    
+    <!-- Load application scripts -->
+    <script src="../js/translationService.js"></script>
+    <script src="../js/visionService.js"></script>
+    <script src="../js/groqService.js"></script>
+    <script src="../js/fileProcessing.js"></script>
+    <script src="../js/audioRecorder.js"></script>
+    <script src="../js/messageActions.js"></script>
+    <script src="../js/app.js"></script>
+   <script src="../js/conversationHistory.js"></script>
+</body>
+</html>
