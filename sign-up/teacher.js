@@ -70,6 +70,7 @@ import { collection, query, where, getDocs, doc, setDoc } from "https://www.gsta
       subjects,
       gradeLevels,
       availableHours,
+      role: "tutor"  ,
       createdAt: new Date().toISOString(),
     });
 
