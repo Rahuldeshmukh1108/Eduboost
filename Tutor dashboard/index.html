@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TutorPro Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <i class="fas fa-graduation-cap"></i>
+                    <h2>TutorPro</h2>
+                </div>
+                <button id="sidebar-toggle" class="sidebar-toggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+            
+            <nav class="sidebar-menu">
+                <ul>
+                    <li class="active">
+                        <a href="#dashboard">
+                            <i class="fas fa-home"></i>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#students">
+                            <i class="fas fa-user-graduate"></i>
+                            <span>Students</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#schedule">
+                            <i class="fas fa-calendar-alt"></i>
+                            <span>Schedule</span>
+                        </a>
+                    </li>
+                    <li>
+                      <a href="#feedback">
+                          <i class="fas fa-comment-dots"></i>
+                          <span>Feedback</span>
+                      </a>
+                  </li>
+                  
+                    <li>
+                        <a href="#messages">
+                            <i class="fas fa-comment"></i>
+                            <span>Messages</span>
+                            <span class="badge">5</span>
+                        </a>
+                    </li>
+                   
+                </ul>
+                
+                <div class="sidebar-section">
+                    <h3>Settings</h3>
+                    <ul>
+                        <li>
+                            <a href="#profile">
+                                <i class="fas fa-user"></i>
+                                <span>Profile</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#settings">
+                                <i class="fas fa-cog"></i>
+                                <span>Settings</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+            
+            <div class="sidebar-footer">
+                <div class="user-info">
+                    <img src="https://via.placeholder.com/40" alt="Profile" class="avatar">
+                    <div>
+                        <p class="user-name">John Doe</p>
+                        <p class="user-role">Math Tutor</p>
+                    </div>
+                </div>
+                <button class="logout-btn">
+                    <i class="fas fa-sign-out-alt"></i>
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="top-bar">
+                <button id="mobile-toggle" class="mobile-toggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+                
+                <div class="top-bar-right">
+                    <button class="notification-btn">
+                        <i class="fas fa-bell"></i>
+                        <span class="badge">3</span>
+                    </button>
+                    <button class="theme-toggle" id="theme-toggle">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                </div>
+            </header>
+
+            <div class="content-wrapper">
+                <div class="page-header">
+                    <h1>Dashboard</h1>
+                    <p>Welcome back, John! Here's an overview of your tutoring activities.</p>
+                </div>
+
+                <!-- Stats Cards -->
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-card-header">
+                            <h3>Total Students</h3>
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="stat-card-body">
+                            <h2>24</h2>
+                            <p>+2 from last month</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-card-header">
+                            <h3>Hours This Month</h3>
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="stat-card-body">
+                            <h2>48.5</h2>
+                            <p>+12% from last month</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-card-header">
+                            <h3>Active Courses</h3>
+                            <i class="fas fa-book-open"></i>
+                        </div>
+                        <div class="stat-card-body">
+                            <h2>5</h2>
+                            <p>+1 from last month</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-card-header">
+                            <h3>Revenue</h3>
+                            <i class="fas fa-dollar-sign"></i>
+                        </div>
+                        <div class="stat-card-body">
+                            <h2>$2,450</h2>
+                            <p>+18% from last month</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tabs Section -->
+                <div class="tabs-container">
+                    <div class="tabs-header">
+                        <div class="tabs">
+                            
+                            <button class="tab-btn" data-tab="students">Recent Students</button>
+                        </div>
+                        <button class="view-all-btn">
+                            <i class="fas fa-calendar"></i>
+                            View All
+                        </button>
+                    </div>
+                    
+                    <div class="tab-content active" id="upcoming-tab">
+                        <div class="sessions-list">
+                            <div class="session-item">
+                                <div class="session-info">
+                                    <img src="https://via.placeholder.com/40" alt="Student" class="avatar">
+                                    <div>
+                                        <p class="student-name">Emma Johnson</p>
+                                        <p class="session-subject">Advanced Calculus</p>
+                                    </div>
+                                </div>
+                                <div class="session-time">
+                                    <p class="time">3:30 PM - 5:00 PM</p>
+                                    <p class="date">Today</p>
+                                </div>
+                            </div>
+                            <div class="session-item">
+                                <div class="session-info">
+                                    <img src="https://via.placeholder.com/40" alt="Student" class="avatar">
+                                    <div>
+                                        <p class="student-name">Michael Chen</p>
+                                        <p class="session-subject">Physics</p>
+                                    </div>
+                                </div>
+                                <div class="session-time">
+                                    <p class="time">10:00 AM - 11:30 AM</p>
+                                    <p class="date">Tomorrow</p>
+                                </div>
+                            </div>
+                            <div class="session-item">
+                                <div class="session-info">
+                                    <img src="https://via.placeholder.com/40" alt="Student" class="avatar">
+                                    <div>
+                                        <p class="student-name">Sophia Williams</p>
+                                        <p class="session-subject">Chemistry</p>
+                                    </div>
+                                </div>
+                                <div class="session-time">
+                                    <p class="time">2:00 PM - 3:30 PM</p>
+                                    <p class="date">Tomorrow</p>
+                                </div>
+                            </div>
+                            <div class="session-item">
+                                <div class="session-info">
+                                    <img src="https://via.placeholder.com/40" alt="Student" class="avatar">
+                                    <div>
+                                        <p class="student-name">James Rodriguez</p>
+                                        <p class="session-subject">Algebra II</p>
+                                    </div>
+                                </div>
+                                <div class="session-time">
+                                    <p class="time">4:00 PM - 5:30 PM</p>
+                                    <p class="date">Apr 18</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="tab-content" id="students-tab">
+                      <div class="tab-content" id="feedback-tab">
+                        <h2>Student Feedback</h2>
+                        <div class="feedback-list">
+                            <div class="feedback-item">
+                                <div class="student-info">
+                                    <img src="https://via.placeholder.com/40" alt="Student" class="avatar">
+                                    <div>
+                                        <p class="student-name">Emma Johnson</p>
+                                        <p class="feedback-date">April 15, 2025</p>
+                                    </div>
+                                </div>
+                                <div class="feedback-message">
+                                    <p>"The sessions were very helpful and the tutor explained everything clearly. Thank you!"</p>
+                                </div>
+                            </div>
+                    
+                            <div class="feedback-item">
+                                <div class="student-info">
+                                    <img src="https://via.placeholder.com/40" alt="Student" class="avatar">
+                                    <div>
+                                        <p class="student-name">Michael Chen</p>
+                                        <p class="feedback-date">April 12, 2025</p>
+                                    </div>
+                                </div>
+                                <div class="feedback-message">
+                                    <p>"Great teaching style and always available to answer doubts!"</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                        <div class="students-list">
+                            <div class="student-item">
+                                <div class="student-info">
+                                    <img src="https://via.placeholder.com/40" alt="Student" class="avatar">
+                                    <div>
+                                        <p class="student-name">Emma Johnson</p>
+                                        <div class="student-details">
+                                            <span class="grade-badge">11th Grade</span>
+                                            <span class="subject">Calculus</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="student-progress">
+                                    <div class="progress-info">
+                                        <span class="progress-text">85%</span>
+                                        <div class="progress-bar">
+                                            <div class="progress" style="width: 85%"></div>
+                                        </div>
+                                    </div>
+                                    <p class="last-session">Last session: Yesterday</p>
+                                </div>
+                            </div>
+                            <div class="student-item">
+                                <div class="student-info">
+                                    <img src="https://via.placeholder.com/40" alt="Student" class="avatar">
+                                    <div>
+                                        <p class="student-name">Michael Chen</p>
+                                        <div class="student-details">
+                                            <span class="grade-badge">10th Grade</span>
+                                            <span class="subject">Physics</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="student-progress">
+                                    <div class="progress-info">
+                                        <span class="progress-text">72%</span>
+                                        <div class="progress-bar">
+                                            <div class="progress" style="width: 72%"></div>
+                                        </div>
+                                    </div>
+                                    <p class="last-session">Last session: 2 days ago</p>
+                                </div>
+                            </div>
+                            <div class="student-item">
+                                <div class="student-info">
+                                    <img src="https://via.placeholder.com/40" alt="Student" class="avatar">
+                                    <div>
+                                        <p class="student-name">Sophia Williams</p>
+                                        <div class="student-details">
+                                            <span class="grade-badge">12th Grade</span>
+                                            <span class="subject">Chemistry</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="student-progress">
+                                    <div class="progress-info">
+                                        <span class="progress-text">90%</span>
+                                        <div class="progress-bar">
+                                            <div class="progress" style="width: 90%"></div>
+                                        </div>
+                                    </div>
+                                    <p class="last-session">Last session: Yesterday</p>
+                                </div>
+                            </div>
+                            <div class="student-item">
+                                <div class="student-info">
+                                    <img src="https://via.placeholder.com/40" alt="Student" class="avatar">
+                                    <div>
+                                        <p class="student-name">James Rodriguez</p>
+                                        <div class="student-details">
+                                            <span class="grade-badge">9th Grade</span>
+                                            <span class="subject">Algebra</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="student-progress">
+                                    <div class="progress-info">
+                                        <span class="progress-text">65%</span>
+                                        <div class="progress-bar">
+                                            <div class="progress" style="width: 65%"></div>
+                                        </div>
+                                    </div>
+                                    <p class="last-session">Last session: 3 days ago</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Two Column Layout -->
+                <div class="two-column-grid">
+                    <!-- Calendar Section -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h2>Schedule</h2>
+                            <p>Your upcoming tutoring sessions</p>
+                        </div>
+                        <div class="card-body">
+                            <div class="calendar" id="calendar">
+                                <!-- Calendar will be rendered by JavaScript -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Course Progress Section -->
+
+                        
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Student Feedback Section -->
+
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
