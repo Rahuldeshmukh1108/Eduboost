@@ -1,35 +1,67 @@
-document.addEventListener("DOMContentLoaded", () => {
-    const studentForm = document.getElementById("student-form")
-  
-    studentForm.addEventListener("submit", (e) => {
-      e.preventDefault()
-  
-      // Get form data
-      const formData = {
-        name: document.getElementById("name").value,
-        email: document.getElementById("email").value,
-        username: document.getElementById("username").value,
-        password: document.getElementById("password").value,
-        confirmPassword: document.getElementById("confirmPassword").value,
-        phone: document.getElementById("phone").value,
-        language: document.getElementById("language").value,
-        location: document.getElementById("location").value,
-      }
-  
-      // Validate passwords match
-      if (formData.password !== formData.confirmPassword) {
-        alert("Passwords do not match!")
-        return
-      }
-  
-      // Log form data (in a real app, you would send this to your server)
-      console.log("Student form submitted:", formData)
-  
-      // You could redirect or show a success message here
-      alert("Student account created successfully!")
-  
-      // Optional: Reset the form
-      studentForm.reset()
-    })
+import { auth, db } from './firebase.js';
+import { createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-auth.js";
+import { collection, query, where, getDocs, doc, setDoc } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js";
+
+document.addEventListener('DOMContentLoaded', () => {
+  const submitBtn = document.getElementById('submit-btn');
+  const studentForm = document.getElementById('student-form');
+
+  studentForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    // Get form data
+    const name = document.getElementById('name').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const username = document.getElementById('username').value.trim();
+    const password = document.getElementById('password').value;
+    const confirmPassword = document.getElementById('confirmPassword').value;
+    const phone = document.getElementById('phone').value.trim();
+    const language = document.getElementById('language').value;
+    const location = document.getElementById('location').value.trim();
+
+
+    // Validate passwords match
+    if (password !== confirmPassword) {
+      alert("Passwords do not match.");
+      return;
+    }
+    
+  try {
+    // ✅ Check if username already exists
+    const q = query(collection(db, "students"), where("username", "==", username));
+    const querySnapshot = await getDocs(q);
+
+    if (!querySnapshot.empty) {
+      alert("Username is already taken. Please choose another.");
+      return;
+    }
+
+        // Create user with Firebase Auth (email already checked by Firebase)
+        const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+        const user = userCredential.user;
+    
+         // ✅ Save user data in Firestore
+    await setDoc(doc(db, "students", user.uid), {
+      uid: user.uid,
+      name,
+      email,
+      username,
+      phone,
+      language,
+      location,
+      createdAt: new Date()
+    });
+    
+
+    
+
+    // You could redirect or show a success message here
+    alert("Signup successful!");
+    window.location.href = "index.html";
+  } catch (error) {
+    console.error("Signup error:", error);
+    alert(error.message);
+    
+  }
   })
-  
+})

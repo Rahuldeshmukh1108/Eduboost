@@ -1,7 +1,7 @@
 // Groq AI Service Module
 class GroqService {
     constructor() {
-      this.apiKey = "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"
+      this.apiKey = "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"
       this.apiUrl = "https://api.groq.com/openai/v1/chat/completions"
       this.cache = new Map()
       this.currentModel = "llama-3.1-8b-instant"

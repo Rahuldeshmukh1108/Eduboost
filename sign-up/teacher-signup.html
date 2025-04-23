@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Teacher Signup - Education Platform</title>
-  <link rel="stylesheet" href="../Css/signup.css">
+  <link rel="stylesheet" href="signup.css">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -70,7 +70,7 @@
               <input type="password" id="confirmPassword" name="confirmPassword" class="form-input" required>
             </div>
 
-            <div class="form-group">
+            <div class="form-group" required>
               <label class="form-label">Subjects You Can Teach</label>
               <div class="checkbox-grid">
                 <div class="checkbox-item">
@@ -120,9 +120,9 @@
               </div>
             </div>
 
-            <div class="form-group">
-              <label class="form-label">Grade Levels You Can Teach</label>
-              <div class="checkbox-list">
+            <div class="form-group" required >
+              <label class="form-label" >Grade Levels You Can Teach</label>
+              <div class="checkbox-list"  >
                 <div class="checkbox-item">
                   <input type="checkbox" id="level-elementary" name="gradeLevels" value="elementary" class="checkbox">
                   <label for="level-elementary" class="checkbox-label">Elementary School (Grades 1-5)</label>
@@ -158,11 +158,11 @@
                   <label for="hour-evening" class="checkbox-label">Evening (4PM - 8PM)</label>
                 </div>
                 <div class="checkbox-item">
-                  <input type="checkbox" id="hour-night" name="availableHours" value="night" class="checkbox">
+                  <input type="checkbox" id="hour-night" name="availableHours" value="night" class="checkbox" >
                   <label for="hour-night" class="checkbox-label">Night (8PM - 12AM)</label>
                 </div>
                 <div class="checkbox-item">
-                  <input type="checkbox" id="hour-weekend" name="availableHours" value="weekend" class="checkbox">
+                  <input type="checkbox" id="hour-weekend" name="availableHours" value="weekend" class="checkbox" >
                   <label for="hour-weekend" class="checkbox-label">Weekends</label>
                 </div>
               </div>
@@ -200,7 +200,8 @@
     </div>
   </main>
 
-  <script src="../js/teacher.js"></script>
-  <script src="../js/theme.js"></script>
+  <script type="module" src="./teacher.js"></script>
+  <script src="./theme.js"></script>
+ <script type="module" src="./firebase.js"></script>
 </body>
 </html>
