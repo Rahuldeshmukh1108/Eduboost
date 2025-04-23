@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Dashboard</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <div class="dashboard-container">
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <div class="logo">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon">
+            <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path>
+            <path d="M6 12v5c3 3 9 3 12 0v-5"></path>
+          </svg>
+          <span>EduTutor</span>
+        </div>
+        <button id="mobile-toggle" class="mobile-toggle">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+      <nav class="sidebar-nav">
+        <div class="nav-group">
+          <div class="nav-group-label">Main</div>
+          <ul class="nav-menu">
+            <li class="nav-item">
+              <a href="#">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon">
+                  <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                  <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                </svg>
+                <span>Home</span>
+              </a>
+            </li>
+            <li class="nav-item active">
+              <a href="#">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon">
+                  <rect width="7" height="9" x="3" y="3" rx="1"></rect>
+                  <rect width="7" height="5" x="14" y="3" rx="1"></rect>
+                  <rect width="7" height="9" x="14" y="12" rx="1"></rect>
+                  <rect width="7" height="5" x="3" y="16" rx="1"></rect>
+                </svg>
+                <span>Dashboard</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+        <div class="nav-group">
+          <div class="nav-group-label">Account</div>
+          <ul class="nav-menu">
+            <li class="nav-item">
+              <a href="#">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon">
+                  <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
+                  <circle cx="12" cy="7" r="4"></circle>
+                </svg>
+                <span>Profile</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="#" id="settings-link">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon">
+                  <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"></path>
+                  <circle cx="12" cy="12" r="3"></circle>
+                </svg>
+                <span>Settings</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+      <div class="sidebar-footer">
+        <div class="user-info">
+          <div class="avatar">
+            <img src="https://via.placeholder.com/32" alt="User">
+          </div>
+          <div class="user-details">
+            <p class="user-name">Alex Johnson</p>
+            <p class="user-role">Student</p>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <div class="mobile-header">
+        <button id="sidebar-toggle" class="sidebar-toggle">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+        </button>
+        <div class="logo">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon">
+            <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path>
+            <path d="M6 12v5c3 3 9 3 12 0v-5"></path>
+          </svg>
+          <span>EduTutor</span>
+        </div>
+      </div>
+      
+      <div class="content-container">
+        <!-- Wallet Section -->
+        <section class="wallet-section card">
+          <div class="card-header">
+            <div>
+              <h2 class="card-title">Wallet</h2>
+              <p class="card-description">Manage your tutoring credits</p>
+            </div>
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon">
+              <path d="M21 12V7H5a2 2 0 0 1 0-4h14v4"></path>
+              <path d="M3 5v14a2 2 0 0 0 2 2h16v-5"></path>
+              <path d="M18 12a2 2 0 0 0 0 4h4v-4Z"></path>
+            </svg>
+          </div>
+          <div class="card-content">
+            <div class="tabs">
+              <div class="tab-list">
+                <button class="tab-trigger active" data-tab="balance">Balance</button>
+                <button class="tab-trigger" data-tab="transactions">Transactions</button>
+              </div>
+              <div class="tab-content active" id="balance">
+                <div class="balance-info">
+                  <div class="balance-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon">
+                      <line x1="12" x2="12" y1="2" y2="22"></line>
+                      <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                    </svg>
+                  </div>
+                  <div>
+                    <p class="balance-label">Available Balance</p>
+                    <p class="balance-amount">$250.00</p>
+                  </div>
+                </div>
+                <div class="wallet-actions">
+                  <button class="btn btn-outline" id="addFundsBtn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon">
+                      <path d="M5 12h14"></path>
+                      <path d="M12 5v14"></path>
+                    </svg>
+                    Add Funds
+                  </button>
+                  <button class="btn btn-outline" id="paymentMethodsBtn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon">
+                      <rect width="20" height="14" x="2" y="5" rx="2"></rect>
+                      <line x1="2" x2="22" y1="10" y2="10"></line>
+                    </svg>
+                    Payment Methods
+                  </button>
+                </div>
+              </div>
+              <div class="tab-content" id="transactions">
+                <div class="transactions-list">
+                  <div class="transaction-item">
+                    <div>
+                      <p class="transaction-title">Tutoring Session - Math</p>
+                      <p class="transaction-date">April 10, 2025</p>
+                    </div>
+                    <p class="transaction-amount negative">-$45.00</p>
+                  </div>
+                  <div class="transaction-item">
+                    <div>
+                      <p class="transaction-title">Added Funds</p>
+                      <p class="transaction-date">April 5, 2025</p>
+                    </div>
+                    <p class="transaction-amount positive">+$100.00</p>
+                  </div>
+                  <div class="transaction-item">
+                    <div>
+                      <p class="transaction-title">Tutoring Session - Physics</p>
+                      <p class="transaction-date">April 3, 2025</p>
+                    </div>
+                    <p class="transaction-amount negative">-$35.00</p>
+                  </div>
+                  <div class="transaction-item">
+                    <div>
+                      <p class="transaction-title">Tutoring Session - Literature</p>
+                      <p class="transaction-date">April 1, 2025</p>
+                    </div>
+                    <p class="transaction-amount negative">-$40.00</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card-footer">
+            <p class="help-text">Need help with your wallet? Contact support at support@edututor.com</p>
+          </div>
+        </section>
+
+        <!-- Dashboard Grid -->
+        <div class="dashboard-grid">
+          <!-- Left Column: Personal Dashboard -->
+          <div class="dashboard-column">
+            <section class="card">
+              <div class="card-header">
+                <h2 class="card-title">Problems Solved</h2>
+                <p class="card-description">Weekly progress</p>
+              </div>
+              <div class="card-content">
+                <div class="stats-highlight">
+                  <div class="stats-number">66</div>
+                  <div class="stats-label">Problems this week</div>
+                </div>
+                <div class="chart-container">
+                  <canvas id="problemsChart"></canvas>
+                </div>
+              </div>
+            </section>
+
+            <section class="card">
+              <div class="card-header">
+                <h2 class="card-title">Subject Progress</h2>
+                <p class="card-description">Completion by subject</p>
+              </div>
+              <div class="card-content">
+                <div class="progress-list">
+                  <div class="progress-item">
+                    <div class="progress-header">
+                      <span class="progress-label">Math</span>
+                      <span class="progress-value">85/100</span>
+                    </div>
+                    <div class="progress-bar">
+                      <div class="progress-fill" style="width: 85%"></div>
+                    </div>
+                  </div>
+                  <div class="progress-item">
+                    <div class="progress-header">
+                      <span class="progress-label">Science</span>
+                      <span class="progress-value">65/100</span>
+                    </div>
+                    <div class="progress-bar">
+                      <div class="progress-fill" style="width: 65%"></div>
+                    </div>
+                  </div>
+                  <div class="progress-item">
+                    <div class="progress-header">
+                      <span class="progress-label">English</span>
+                      <span class="progress-value">92/100</span>
+                    </div>
+                    <div class="progress-bar">
+                      <div class="progress-fill" style="width: 92%"></div>
+                    </div>
+                  </div>
+                  <div class="progress-item">
+                    <div class="progress-header">
+                      <span class="progress-label">History</span>
+                      <span class="progress-value">78/100</span>
+                    </div>
+                    <div class="progress-bar">
+                      <div class="progress-fill" style="width: 78%"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+          </div>
+
+          <!-- Right Column: AI Analysis and Summary -->
+          <div class="dashboard-column">
+            <!-- AI Analysis -->
+            <section class="card">
+              <div class="card-header">
+                <div>
+                  <h2 class="card-title">Groq AI Dashboard Analysis</h2>
+                  <p class="card-description">Personalized insights based on your performance</p>
+                </div>
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon sparkles">
+                  <path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"></path>
+                  <path d="M5 3v4"></path>
+                  <path d="M19 17v4"></path>
+                  <path d="M3 5h4"></path>
+                  <path d="M17 19h4"></path>
+                </svg>
+              </div>
+              <div class="card-content">
+                <div class="ai-analysis">
+                  <div class="ai-loading" id="analysis-loading">
+                    <div class="spinner"></div>
+                    <p>Analyzing your performance data with Groq AI...</p>
+                  </div>
+                  <div class="ai-content" id="analysis-content">
+                    <div class="analysis-section">
+                      <p class="section-text">
+                        Your weekly performance shows remarkable progress with a 23% increase in problem-solving rate. You've completed 66 problems this week, placing you in the top 15% of students. Math remains your strongest subject with 85% completion, while Science needs more attention at 65%. Your critical thinking skills have improved significantly, particularly in algebraic reasoning and data analysis. Focus on strengthening geometry concepts and scientific writing to achieve more balanced results. Consider scheduling a tutoring session for these areas while maintaining your excellent progress in other subjects.
+                      </p>
+                    </div>
+                  </div>
+                  <button class="btn btn-outline refresh-btn" id="refresh-analysis">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon">
+                      <path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"></path>
+                      <path d="M21 3v5h-5"></path>
+                      <path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"></path>
+                      <path d="M3 21v-5h5"></path>
+                    </svg>
+                    Refresh Analysis
+                  </button>
+                </div>
+              </div>
+            </section>
+
+            <!-- AI Summary -->
+            <section class="card">
+              <div class="card-header">
+                <div>
+                  <h2 class="card-title">Groq AI Solution Summaries</h2>
+                  <p class="card-description">AI-generated summaries of your solved questions</p>
+                </div>
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon sparkles">
+                  <path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"></path>
+                  <path d="M5 3v4"></path>
+                  <path d="M19 17v4"></path>
+                  <path d="M3 5h4"></path>
+                  <path d="M17 19h4"></path>
+                </svg>
+              </div>
+              <div class="card-content">
+                <div class="ai-summary">
+                  <div class="ai-loading" id="summary-loading">
+                    <div class="spinner"></div>
+                    <p>Generating solution summaries with Groq AI...</p>
+                  </div>
+                  <div class="ai-content" id="summary-content">
+                    <div class="summary-section">
+                      <h3 class="section-title">Quadratic Equations</h3>
+                      <p class="section-text">
+                        A quadratic equation is a second-degree polynomial equation of the form ax² + bx + c = 0, where a ≠ 0. The
+                        solutions to this equation are given by the quadratic formula:
+                      </p>
+                      <div class="formula">x = (-b ± √(b² - 4ac)) / 2a</div>
+                      <p class="section-text">
+                        You've successfully solved 15 problems involving quadratic equations this week, showing good understanding
+                        of the discriminant and its implications for the number of solutions.
+                      </p>
+                    </div>
+                    <div class="summary-section">
+                      <h3 class="section-title">Literary Analysis</h3>
+                      <p class="section-text">
+                        In your recent essay on "The Great Gatsby," you effectively analyzed the symbolism of the green light,
+                        representing Gatsby's hopes and dreams. Your tutor suggested expanding on how this symbol evolves
+                        throughout the novel to strengthen your argument.
+                      </p>
+                    </div>
+                  </div>
+                  <div class="summary-history" id="summary-history">
+                    <h3 class="section-title">Question History</h3>
+                    <div class="history-list">
+                      <!-- Question history will be populated here -->
+                    </div>
+                  </div>
+                  <div class="summary-input">
+                    <input type="text" id="question-input" placeholder="Ask a question about your studies...">
+                    <button class="btn btn-primary" id="ask-question">Ask</button>
+                  </div>
+                  <button class="btn btn-outline refresh-btn" id="refresh-summary">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon">
+                      <path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"></path>
+                      <path d="M21 3v5h-5"></path>
+                      <path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"></path>
+                      <path d="M3 21v-5h5"></path>
+                    </svg>
+                    Refresh Summaries
+                  </button>
+                </div>
+              </div>
+            </section>
+          </div>
+        </div>
+
+        <!-- Tutor Feedback (Horizontal Scrolling) -->
+        <section class="card tutor-feedback">
+          <div class="card-header">
+            <div>
+              <h2 class="card-title">Tutor Feedback</h2>
+              <p class="card-description">Recent assessments from your tutors</p>
+            </div>
+            <button class="btn btn-outline" id="request-feedback-btn">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon">
+                <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+              </svg>
+              Request Feedback
+            </button>
+          </div>
+          <div class="card-content">
+            <div class="feedback-controls">
+              <button class="scroll-btn scroll-left" id="scroll-left">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="m15 18-6-6 6-6"></path>
+                </svg>
+              </button>
+              <button class="scroll-btn scroll-right" id="scroll-right">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="m9 18 6-6-6-6"></path>
+                </svg>
+              </button>
+            </div>
+            <div class="feedback-carousel" id="feedback-carousel">
+              <div class="feedback-item">
+                <div class="feedback-header">
+                  <div class="tutor-avatar">
+                    <img src="https://via.placeholder.com/40" alt="Dr. Sarah Chen">
+                  </div>
+                  <div class="tutor-info">
+                    <div class="tutor-name-subject">
+                      <h3 class="tutor-name">Dr. Sarah Chen</h3>
+                      <span class="tutor-subject">Mathematics</span>
+                    </div>
+                    <p class="feedback-date">April 10, 2025</p>
+                    <div class="rating">
+                      <span class="star filled"></span>
+                      <span class="star filled"></span>
+                      <span class="star filled"></span>
+                      <span class="star filled"></span>
+                      <span class="star filled"></span>
+                    </div>
+                  </div>
+                </div>
+                <p class="feedback-content">
+                  Alex has shown remarkable improvement in calculus this month. His problem-solving approach is methodical and he's now able to tackle complex integration problems with confidence. I recommend focusing on applications of differential equations next.
+                </p>
+              </div>
+
+              <div class="feedback-item">
+                <div class="feedback-header">
+                  <div class="tutor-avatar">
+                    <img src="https://via.placeholder.com/40" alt="Prof. Michael Rodriguez">
+                  </div>
+                  <div class="tutor-info">
+                    <div class="tutor-name-subject">
+                      <h3 class="tutor-name">Prof. Michael Rodriguez</h3>
+                      <span class="tutor-subject">Physics</span>
+                    </div>
+                    <p class="feedback-date">April 8, 2025</p>
+                    <div class="rating">
+                      <span class="star filled"></span>
+                      <span class="star filled"></span>
+                      <span class="star filled"></span>
+                      <span class="star filled"></span>
+                      <span class="star"></span>
+                    </div>
+                  </div>
+                </div>
+                <p class="feedback-content">
+                  Good progress on understanding wave mechanics. Alex can now solve basic interference problems, but needs more practice with diffraction concepts. I've assigned additional practice problems to reinforce these concepts.
+                </p>
+              </div>
+
+              <div class="feedback-item">
+                <div class="feedback-header">
+                  <div class="tutor-avatar">
+                    <img src="https://via.placeholder.com/40" alt="Dr. Emily Watson">
+                  </div>
+                  <div class="tutor-info">
+                    <div class="tutor-name-subject">
+                      <h3 class="tutor-name">Dr. Emily Watson</h3>
+                      <span class="tutor-subject">Literature</span>
+                    </div>
+                    <p class="feedback-date">April 5, 2025</p>
+                    <div class="rating">
+                      <span class="star filled"></span>
+                      <span class="star filled"></span>
+                      <span class="star filled"></span>
+                      <span class="star filled"></span>
+                      <span class="star filled"></span>
+                    </div>
+                  </div>
+                </div>
+                <p class="feedback-content">
+                  Alex's analysis of Shakespearean sonnets shows deep understanding of metaphor and structure. His essay on Sonnet 18 was particularly insightful. For improvement, I suggest focusing on historical context in future analyses.
+                </p>
+              </div>
+              
+              <div class="feedback-item">
+                <div class="feedback-header">
+                  <div class="tutor-avatar">
+                    <img src="https://via.placeholder.com/40" alt="Dr. James Wilson">
+                  </div>
+                  <div class="tutor-info">
+                    <div class="tutor-name-subject">
+                      <h3 class="tutor-name">Dr. James Wilson</h3>
+                      <span class="tutor-subject">Chemistry</span>
+                    </div>
+                    <p class="feedback-date">April 3, 2025</p>
+                    <div class="rating">
+                      <span class="star filled"></span>
+                      <span class="star filled"></span>
+                      <span class="star filled"></span>
+                      <span class="star filled"></span>
+                      <span class="star"></span>
+                    </div>
+                  </div>
+                </div>
+                <p class="feedback-content">
+                  Alex demonstrates strong understanding of chemical bonding principles. His lab work is meticulous and well-documented. For further improvement, I suggest focusing on reaction mechanisms and transition states.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+  </div>
+
+  <!-- Add Funds Modal -->
+  <div class="modal" id="addFundsModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Add Funds to Wallet</h3>
+        <button class="close-modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="payment-steps">
+          <div class="step active" data-step="1">
+            <div class="step-number">1</div>
+            <div class="step-label">Amount</div>
+          </div>
+          <div class="step" data-step="2">
+            <div class="step-number">2</div>
+            <div class="step-label">Payment</div>
+          </div>
+          <div class="step" data-step="3">
+            <div class="step-number">3</div>
+            <div class="step-label">Confirm</div>
+          </div>
+        </div>
+        
+        <div class="step-content active" id="step-1">
+          <div class="form-group">
+            <label for="amount">Amount to Add</label>
+            <div class="amount-input-wrapper">
+              <span class="currency-symbol">$</span>
+              <input type="number" id="amount" min="10" step="5" value="50">
+            </div>
+          </div>
+          <div class="quick-amounts">
+            <button class="quick-amount" data-amount="20">$20</button>
+            <button class="quick-amount" data-amount="50">$50</button>
+            <button class="quick-amount" data-amount="100">$100</button>
+            <button class="quick-amount" data-amount="200">$200</button>
+          </div>
+          <div class="step-buttons">
+            <button class="btn btn-primary next-step" data-next="2">Continue to Payment</button>
+          </div>
+        </div>
+        
+        <div class="step-content" id="step-2">
+          <div class="form-group">
+            <label>Select Payment Method</label>
+            <div class="payment-methods">
+              <div class="payment-method">
+                <input type="radio" id="card-1" name="payment-method" value="card-1" checked>
+                <label for="card-1" class="payment-card">
+                  <div class="card-icon visa"></div>
+                  <span>Visa ending in 4242</span>
+                </label>
+              </div>
+              <div class="payment-method">
+                <input type="radio" id="card-2" name="payment-method" value="card-2">
+                <label for="card-2" class="payment-card">
+                  <div class="card-icon mastercard"></div>
+                  <span>Mastercard ending in 5678</span>
+                </label>
+              </div>
+              <div class="payment-method">
+                <input type="radio" id="paypal" name="payment-method" value="paypal">
+                <label for="paypal" class="payment-card">
+                  <div class="card-icon paypal"></div>
+                  <span>PayPal</span>
+                </label>
+              </div>
+              <div class="payment-method">
+                <input type="radio" id="new-card" name="payment-method" value="new-card">
+                <label for="new-card" class="payment-card">
+                  <div class="card-icon add-card"></div>
+                  <span>Add new payment method</span>
+                </label>
+              </div>
+            </div>
+          </div>
+          
+          <div class="form-group" id="new-card-form" style="display: none;">
+            <label for="card-number">Card Number</label>
+            <input type="text" id="card-number" placeholder="1234 5678 9012 3456" maxlength="19" class="card-number-input">
+            
+            <div class="card-details">
+              <div class="form-group">
+                <label for="expiry">Expiry Date</label>
+                <input type="text" id="expiry" placeholder="MM/YY" maxlength="5">
+              </div>
+              <div class="form-group">
+                <label for="cvv">CVV</label>
+                <input type="text" id="cvv" placeholder="123" maxlength="3">
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <label for="card-name">Name on Card</label>
+              <input type="text" id="card-name" placeholder="John Doe">
+            </div>
+          </div>
+          
+          <div class="step-buttons">
+            <button class="btn btn-outline prev-step" data-prev="1">Back</button>
+            <button class="btn btn-primary next-step" data-next="3">Review Payment</button>
+          </div>
+        </div>
+        
+        <div class="step-content" id="step-3">
+          <div class="payment-summary">
+            <h4>Payment Summary</h4>
+            <div class="summary-row">
+              <span>Amount:</span>
+              <span id="summary-amount">$50.00</span>
+            </div>
+            <div class="summary-row">
+              <span>Payment Method:</span>
+              <span id="summary-payment-method">Visa ending in 4242</span>
+            </div>
+            <div class="summary-row total">
+              <span>Total:</span>
+              <span id="summary-total">$50.00</span>
+            </div>
+          </div>
+          
+          <div class="step-buttons">
+            <button class="btn btn-outline prev-step" data-prev="2">Back</button>
+            <button class="btn btn-primary" id="confirmAddFunds">Confirm Payment</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Settings Modal -->
+  <div class="modal" id="settingsModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Settings</h3>
+        <button class="close-modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="settings-section">
+          <h4>Appearance</h4>
+          <div class="form-group">
+            <label for="theme-select">Theme</label>
+            <select id="theme-select" class="form-control">
+              <option value="light">Light</option>
+              <option value="dark">Dark</option>
+              <option value="system">System Default</option>
+            </select>
+          </div>
+        </div>
+        
+        <div class="settings-section">
+          <h4>Accessibility</h4>
+          <div class="form-group">
+            <label for="font-size">Font Size</label>
+            <div class="range-slider">
+              <input type="range" id="font-size" min="80" max="120" value="100">
+              <div class="range-value" id="font-size-value">100%</div>
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label for="font-family">Font Style</label>
+            <select id="font-family" class="form-control">
+              <option value="system-ui">System Default</option>
+              <option value="serif">Serif</option>
+              <option value="sans-serif">Sans Serif</option>
+              <option value="monospace">Monospace</option>
+              <option value="dyslexic">Dyslexic Friendly</option>
+            </select>
+          </div>
+        </div>
+        
+        <div class="settings-section">
+          <h4>Language</h4>
+          <div class="form-group">
+            <label for="language-select">Display Language</label>
+            <select id="language-select" class="form-control">
+              <option value="en">English</option>
+              <option value="es">Español</option>
+              <option value="fr">Français</option>
+              <option value="de">Deutsch</option>
+              <option value="zh">中文</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-outline" id="reset-settings">Reset to Default</button>
+        <button class="btn btn-primary" id="save-settings">Save Changes</button>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Tutor Feedback Form Modal -->
+  <div class="modal" id="feedbackFormModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Request Tutor Feedback</h3>
+        <button class="close-modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form id="tutor-feedback-form">
+          <div class="form-group">
+            <label for="tutor-select">Select Tutor</label>
+            <select id="tutor-select" class="form-control" required>
+              <option value="">-- Select a tutor --</option>
+              <option value="1">Dr. Sarah Chen (Mathematics)</option>
+              <option value="2">Prof. Michael Rodriguez (Physics)</option>
+              <option value="3">Dr. Emily Watson (Literature)</option>
+              <option value="4">Dr. James Wilson (Chemistry)</option>
+            </select>
+          </div>
+          
+          <div class="form-group">
+            <label for="subject">Subject</label>
+            <input type="text" id="subject" class="form-control" placeholder="e.g., Calculus II, Wave Mechanics" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="session-date">Session Date</label>
+            <input type="date" id="session-date" class="form-control" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="feedback-request">What would you like feedback on?</label>
+            <textarea id="feedback-request" class="form-control" rows="4" placeholder="Describe what aspects you'd like feedback on..." required></textarea>
+          </div>
+          
+          <div class="form-group">
+            <label>Specific Areas for Feedback</label>
+            <div class="checkbox-group">
+              <label class="checkbox-label">
+                <input type="checkbox" name="feedback-areas" value="understanding"> Concept Understanding
+              </label>
+              <label class="checkbox-label">
+                <input type="checkbox" name="feedback-areas" value="problem-solving"> Problem-Solving Approach
+              </label>
+              <label class="checkbox-label">
+                <input type="checkbox" name="feedback-areas" value="progress"> Progress Assessment
+              </label>
+              <label class="checkbox-label">
+                <input type="checkbox" name="feedback-areas" value="improvement"> Areas for Improvement
+              </label>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-outline" id="cancel-feedback">Cancel</button>
+        <button class="btn btn-primary" id="submit-feedback-request">Submit Request</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
