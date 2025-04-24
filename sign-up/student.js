@@ -49,6 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
       phone,
       language,
       location,
+      role: "student"  ,
       createdAt: new Date()
     });
     
