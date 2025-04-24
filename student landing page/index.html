@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>LiveDoubt.AI - Ask your doubt. Get AI + human help.</title>
+  <title>Eduboost - Ask your doubt. Get AI + human help.</title>
   <link rel="stylesheet" href="Styles.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
 </head>
@@ -18,13 +18,13 @@
 
     <!-- Desktop Menu -->
     <nav class="nav-links">
-      <a href="#" class="active">Home</a>
-      <a href="#">Features</a>
+      <a href="index.html" class="active">Home</a>
+      <a href="#features">Features</a>
       <div class="profile-container" onclick="toggleDropdown()">
         <img src="profile.png" alt="Profile" class="profile-icon" />
         <div id="profileDropdown" class="dropdown hidden">
-          <a href="/profile">My Profile</a>
-          <a href="/logout">Logout</a>
+          <a href="/profile"  >My Profile</a>
+          <a onclick="window.location.replace('../index.html')" >Logout</a>
         </div>
       </div>
       
@@ -42,10 +42,10 @@
 
   <!-- Mobile Menu -->
   <div class="mobile-menu" id="menu">
-    <a href="#" class="active">Home</a>
-    <a href="#">Features</a>
+    <a href="index.html" class="active">Home</a>
+    <a href="#features">Features</a>
     <a href="#">profile</a>
-    <a href="#" class="btn-login">Logout</a>
+    <a onclick="window.location.replace('../index.html')" class="btn-login">Logout</a>
   </div>
 </header>
 
@@ -58,12 +58,12 @@
         <h1>Ask your doubt. <br>Get AI + human help in your language. </h1>
         <p>Supports voice, image, text, and video questions.</p>
         <div class="hero-buttons">
-          <a href="./Html/student-signup.html" class="btn btn-primary">Start Asking Doubts</a>
-          <a href="./Html/teacher-signup.html" class="btn btn-secondary">dashboard</a>
+          <a href="../liveregional/stud.html" class="btn btn-primary">Start Asking Doubts</a>
+          <a href="../studentdashboard/index.html" class="btn btn-secondary">dashboard</a>
         </div>
       </div>
       <div class="hero-image">
-        <img src="tutionifylanding.jpeg" alt="LiveDoubt.AI App Interface">
+        <img src="../tutionifylanding.jpeg" alt="Eduboost App Interface">
       </div>
     </div>
   </section>
@@ -73,30 +73,32 @@
     <div class="container">
       <h2 class="section-title">Why Choose Eduboost?</h2>
       <div class="features-grid">
+       <a href="../Snaptosolve/index.html">
         <div class="feature-card">
           <div class="feature-icon">
-            <img src="snaptosolve.jpeg" alt="Snap-to-Solve">
+            <img src="../snaptosolve.jpeg" alt="Snap-to-Solve">
           </div>
           <h3>Snap-to-Solve Doubt</h3>
           <p>Take a photo of your problem and get instant solutions. Perfect for math equations, diagrams, and more.</p>
         </div>
+       </a>
         <div class="feature-card">
           <div class="feature-icon">
-            <img src="livetutor.jpeg" alt="Live Tutors">
+            <img src="../livetutor.jpeg" alt="Live Tutors">
           </div>
           <h3>Live Regional Tutors</h3>
           <p>Connect with tutors who understand your local curriculum and can explain concepts in your language.</p>
         </div>
         <div class="feature-card">
           <div class="feature-icon">
-            <img src="aifeedback.jpeg" alt="AI Feedback">
+            <img src="../aifeedback.jpeg" alt="AI Feedback">
           </div>
           <h3>AI Feedback in Your Language</h3>
           <p>Get instant AI-powered explanations in 10+ Indian languages, making learning accessible to everyone.</p>
         </div>
         <a href="./Html/Multimodal.html"><div class="feature-card">
             <div class="feature-icon">
-              <img src="multimodalsuport.jpeg" alt="Multimodal Support">
+              <img src="../multimodalsuport.jpeg" alt="Multimodal Support">
             </div>
             <h3>Multimodal Support</h3>
             <p>Ask questions through text, voice, images, or video - whatever works best for your learning style.</p>
@@ -157,7 +159,7 @@
                 <p class="testimonial-meta">Class 10 Student, Delhi</p>
               </div>
             </div>
-            <p class="testimonial-text">"LiveDoubt.AI helped me understand complex physics problems. I could ask questions in Hindi and get clear explanations from tutors who really understood my confusion."</p>
+            <p class="testimonial-text">"Eduboost helped me understand complex physics problems. I could ask questions in Hindi and get clear explanations from tutors who really understood my confusion."</p>
             <div class="testimonial-rating">
               <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
             </div>
@@ -170,7 +172,7 @@
                 <p class="testimonial-meta">Math Tutor, 5+ years experience</p>
               </div>
             </div>
-            <p class="testimonial-text">"As a tutor on LiveDoubt.AI, I can help students from my region in their native language. The AI assistance helps me focus on deeper explanations rather than basic concepts."</p>
+            <p class="testimonial-text">"As a tutor on Eduboost, I can help students from my region in their native language. The AI assistance helps me focus on deeper explanations rather than basic concepts."</p>
             <div class="testimonial-rating">
               <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
             </div>
@@ -214,9 +216,9 @@
     <h2>Frequently Asked Questions</h2>
     <div class="faq-container">
       <div class="faq-item">
-        <button class="faq-question">What is LiveDoubt.AI?</button>
+        <button class="faq-question">What is Eduboost?</button>
         <div class="faq-answer">
-          <p>LiveDoubt.AI is a platform where students can ask doubts in multiple formats and languages, and get help from AI and live tutors.</p>
+          <p>Eduboost is a platform where students can ask doubts in multiple formats and languages, and get help from AI and live tutors.</p>
         </div>
       </div>
       <div class="faq-item">
@@ -258,8 +260,8 @@
     <div class="container">
       <div class="footer-content">
         <div class="footer-logo">
-          <img src="https://via.placeholder.com/40" alt="LiveDoubt.AI Logo">
-          <span>LiveDoubt.AI</span>
+          <img src="https://via.placeholder.com/40" alt="Eduboost Logo">
+          <span>Eduboost</span>
         </div>
         <div class="footer-links">
           <div class="footer-column">
@@ -292,7 +294,7 @@
         </div>
       </div>
       <div class="footer-bottom">
-        <p>&copy; 2025 LiveDoubt.AI. All rights reserved.</p>
+        <p>&copy; 2025 Eduboost. All rights reserved.</p>
         <div class="app-links">
           <a href="#"><img src="https://via.placeholder.com/120x40" alt="Download on App Store"></a>
           <a href="#"><img src="https://via.placeholder.com/120x40" alt="Get it on Google Play"></a>

@@ -58,7 +58,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // You could redirect or show a success message here
     alert("Signup successful!");
-    window.location.href = "index.html";
+    window.location.href="../student%20landing%20page/index.html"
   } catch (error) {
     console.error("Signup error:", error);
     alert(error.message);

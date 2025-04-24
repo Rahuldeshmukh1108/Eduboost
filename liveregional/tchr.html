@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teacher Dashboard - Teacher-Student Connect</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#" class="nav-logo">Teacher-Student Connect</a>
+            <div class="nav-links">
+                <a href="../Tutor dashboard/index.html" class="nav-link active">
+                    <i class="fas fa-home"></i> Dashboard
+                </a>
+                <button class="logout" onclick="window.location.replace('../index.html')">Logout</button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="dashboard-header">
+            <h1>Teacher Dashboard</h1>
+            <div class="teacher-controls">
+                <div id="notification-bell" class="notification-bell">
+                    <i class="fas fa-bell"></i>
+                    <span id="notification-badge" class="notification-badge hidden"></span>
+                </div>
+                <div class="availability-toggle">
+                    <span id="availability-status" class="availability-status offline">Offline</span>
+                    <label class="switch">
+                        <input type="checkbox" id="availability-toggle">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="dashboard-grid">
+            <div class="main-content">
+                <div class="card">
+                    <div class="card-header">
+                        <h2><i class="fas fa-exclamation-circle"></i> Nearby Student Requests</h2>
+                    </div>
+                    <div class="card-body">
+                        <div id="nearby-requests" class="requests-list">
+                            <!-- Nearby requests will be populated here -->
+                            <div id="nearby-empty-state" class="empty-state">
+                                <p>You're currently offline.</p>
+                                <p>Toggle availability to see nearby requests.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="sidebar">
+                <div class="card">
+                    <div class="card-header">
+                        <h2><i class="fas fa-book"></i> Your Accepted Requests</h2>
+                    </div>
+                    <div class="card-body">
+                        <div id="accepted-requests" class="requests-list">
+                            <!-- Accepted requests will be populated here -->
+                            <div class="empty-state">
+                                <p>No accepted requests yet.</p>
+                                <p>Accepted requests will appear here.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Call Modal -->
+    <div id="call-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Call with <span id="call-student-name">Student</span></h2>
+                <span class="close-modal">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="video-container">
+                    <div class="video-wrapper">
+                        <video id="local-video" autoplay muted></video>
+                        <div class="video-label">You</div>
+                    </div>
+                    <div class="video-wrapper">
+                        <video id="remote-video" autoplay></video>
+                        <div class="video-label">Student</div>
+                    </div>
+                </div>
+                <div class="call-controls">
+                    <button id="toggle-audio" class="btn-circle">
+                        <i class="fas fa-microphone"></i>
+                    </button>
+                    <button id="toggle-video" class="btn-circle">
+                        <i class="fas fa-video"></i>
+                    </button>
+                    <button id="end-call" class="btn-circle btn-danger">
+                        <i class="fas fa-phone-slash"></i>
+                    </button>
+                </div>
+                <div class="call-status">
+                    <p id="call-status-message">Connecting...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Chat Modal -->
+    <div id="chat-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Chat with <span id="chat-student-name">Student</span></h2>
+                <span class="close-modal">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="chat-container">
+                    <div id="chat-messages" class="chat-messages">
+                        <!-- Messages will be populated here -->
+                    </div>
+                    <div class="chat-input">
+                        <input type="text" id="message-input" placeholder="Type your message...">
+                        <button id="send-message" class="btn btn-primary">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <audio id="notification-sound" src="../assets/notification.mp3"></audio>
+
+    <script src="teacher.js"></script>
+    <script src="webrtc.js"></script>
+</body>
+</html>

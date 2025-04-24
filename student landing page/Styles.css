@@ -365,6 +365,7 @@
     box-shadow: var(--shadow-md);
     transition: var(--transition);
     text-align: center;
+    height: 100%;
   }
   
   .feature-card:hover {

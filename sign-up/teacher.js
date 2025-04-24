@@ -75,7 +75,7 @@ import { collection, query, where, getDocs, doc, setDoc } from "https://www.gsta
     });
 
     alert('Teacher account created successfully!');
-    window.location.href = 'dashboard.html'; // or login.html or wherever you want to go
+    window.location.href = '../liveregional/tchr.html'; // or login.html or wherever you want to go
   } catch (error) {
     console.error('Error creating account:', error.message);
     alert(error.message);

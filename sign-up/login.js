@@ -31,7 +31,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (!userData) {
         // Username not found
         alert("User not found. Redirecting to signup...");
-        window.location.href = "signup.html";
+        window.location.href = "../sign-up/student-signup.html";
         return;
       }
 
@@ -41,9 +41,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
       // Redirect based on role
       if (userRole === "student") {
-        window.location.href = "student.html";
+        window.location.href = "../student%20landing%20page/index.html";
       } else if (userRole === "tutor") {
-        window.location.href = "tutor.html";
+        window.location.href = "../liveregional/tchr.html";
       }
 
     } catch (error) {

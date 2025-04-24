@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Dashboard - Teacher-Student Connect</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">Teacher-Student Connect</a>
+            <div class="nav-links">
+                <a href="stud.html" class="nav-link active">
+                    <i class="fas fa-home"></i> Dashboard
+                </a>
+                <a href="index.html" class="nav-link">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h1>Student Dashboard</h1>
+
+        <div class="dashboard-grid">
+            <div class="main-content">
+                <div class="card">
+                    <div class="card-header">
+                        <h2><i class="fas fa-question-circle"></i> Ask a Doubt</h2>
+                    </div>
+                    <div class="card-body">
+                        <form id="doubt-form">
+                            <div class="form-group">
+                                <label for="subject">Subject</label>
+                                <input type="text" id="subject" placeholder="e.g., Mathematics, Physics, Chemistry" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="description">Describe your doubt</label>
+                                <textarea id="description" placeholder="Explain your doubt in detail..." rows="4" required></textarea>
+                            </div>
+
+                            <div class="location-status">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span id="location-status">Waiting for location...</span>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary btn-block" id="submit-btn">
+                                Submit Doubt
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="sidebar">
+                <div class="card">
+                    <div class="card-header">
+                        <h2><i class="fas fa-book"></i> Your Requests</h2>
+                    </div>
+                    <div class="card-body">
+                        <div id="requests-list" class="requests-list">
+                            <!-- Requests will be populated here -->
+                            <div class="empty-state">
+                                <p>No requests yet</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Call Modal -->
+    <div id="call-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Call with <span id="call-teacher-name">Teacher</span></h2>
+                <span class="close-modal">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="video-container">
+                    <div class="video-wrapper">
+                        <video id="local-video" autoplay muted></video>
+                        <div class="video-label">You</div>
+                    </div>
+                    <div class="video-wrapper">
+                        <video id="remote-video" autoplay></video>
+                        <div class="video-label">Teacher</div>
+                    </div>
+                </div>
+                <div class="call-controls">
+                    <button id="toggle-audio" class="btn-circle">
+                        <i class="fas fa-microphone"></i>
+                    </button>
+                    <button id="toggle-video" class="btn-circle">
+                        <i class="fas fa-video"></i>
+                    </button>
+                    <button id="end-call" class="btn-circle btn-danger">
+                        <i class="fas fa-phone-slash"></i>
+                    </button>
+                </div>
+                <div class="call-status">
+                    <p id="call-status-message">Connecting...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Chat Modal -->
+    <div id="chat-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Chat with <span id="chat-teacher-name">Teacher</span></h2>
+                <span class="close-modal">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="chat-container">
+                    <div id="chat-messages" class="chat-messages">
+                        <!-- Messages will be populated here -->
+                    </div>
+                    <div class="chat-input">
+                        <input type="text" id="message-input" placeholder="Type your message...">
+                        <button id="send-message" class="btn btn-primary">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <audio id="notification-sound" src="../assets/notification.mp3"></audio>
+
+    <script src="student.js"></script>
+    <script src="webrtc.js"></script>
+</body>
+</html>
