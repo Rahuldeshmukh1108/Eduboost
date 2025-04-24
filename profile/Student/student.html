@@ -1,0 +1,1242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eduboost - Student Profile</title>
+    <style>
+        :root {
+            --primary-color: #4361ee;
+            --secondary-color: #3f37c9;
+            --accent-color: #4895ef;
+            --light-color: #f8f9fa;
+            --dark-color: #212529;
+            --success-color: #4cc9f0;
+            --warning-color: #f72585;
+            --gray-color: #6c757d;
+            --light-gray: #e9ecef;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5;
+            color: var(--dark-color);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        header {
+            background-color: white;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            margin-bottom: 0; /* Ensure no margin below the header */
+            padding-bottom: 0; /* Remove unnecessary padding */
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            margin: 0; /* Remove any default margin */
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--dark-color);
+        }
+
+        .language-selector {
+            display: flex;
+            align-items: center;
+            margin-left: 20px;
+            margin-bottom: 0; /* Ensure no extra space below the language selector */
+        }
+
+        @media (max-width: 768px) {
+            .language-selector {
+            margin-left: 0;
+            margin-top: 10px;
+            width: 100%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .language-selector {
+            flex-direction: column;
+            align-items: flex-start;
+            margin-top: 5px;
+            }
+        }
+
+        .language-selector select {
+            padding: 5px 10px;
+            border-radius: 5px;
+            border: 1px solid var(--light-gray);
+            background-color: white;
+            cursor: pointer;
+        }
+
+        .profile-container {
+            padding: 30px 0;
+            margin: 0%;
+        }
+
+        .profile-header {
+            background-color: white;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .profile-info {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .profile-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid var(--light-gray);
+        }
+
+        .profile-details h1 {
+            font-size: 24px;
+            margin-bottom: 5px;
+        }
+
+        .profile-id {
+            color: var(--gray-color);
+            margin-bottom: 10px;
+        }
+
+        .profile-stats {
+            display: flex;
+            gap: 30px;
+            margin-top: 15px;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 20px;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        .stat-label {
+            font-size: 14px;
+            color: var(--gray-color);
+        }
+
+        .profile-actions {
+            display: flex;
+            gap: 15px;
+            margin-top: 10px;
+        }
+
+        .btn {
+            padding: 8px 20px;
+            border-radius: 5px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 1px solid var(--primary-color);
+            color: var(--primary-color);
+        }
+
+        .btn:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+        }
+
+        .profile-tabs {
+            display: flex;
+            border-bottom: 1px solid var(--light-gray);
+            overflow-x: auto;
+        }
+
+        .tab {
+            padding: 15px 25px;
+            cursor: pointer;
+            font-weight: 500;
+            color: var(--gray-color);
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s;
+            white-space: nowrap;
+        }
+
+        .tab.active {
+            color: var(--primary-color);
+            border-bottom: 3px solid var(--primary-color);
+        }
+
+        .tab-content {
+            display: none;
+            padding: 20px 0;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .dashboard-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .card-title {
+            font-size: 16px;
+            color: var(--gray-color);
+            margin-bottom: 10px;
+        }
+
+        .card-value {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .progress-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+        }
+
+        .progress-bar {
+            height: 8px;
+            background-color: var(--light-gray);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .progress {
+            height: 100%;
+            background-color: var(--primary-color);
+        }
+
+        .doubt-list, .ai-explanations, .tutors-list, .settings-form {
+            background-color: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            margin-bottom: 20px;
+        }
+
+        .doubt-item {
+            display: flex;
+            padding: 15px 0;
+            border-bottom: 1px solid var(--light-gray);
+        }
+
+        .doubt-item:last-child {
+            border-bottom: none;
+        }
+
+        .doubt-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 8px;
+            background-color: var(--light-gray);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            color: var(--primary-color);
+            font-size: 20px;
+        }
+
+        .doubt-info {
+            flex: 1;
+        }
+
+        .doubt-title {
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
+
+        .doubt-meta {
+            display: flex;
+            gap: 15px;
+            color: var(--gray-color);
+            font-size: 14px;
+            flex-wrap: wrap;
+        }
+
+        .doubt-status {
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .status-resolved {
+            background-color: #d1fae5;
+            color: #065f46;
+        }
+
+        .status-pending {
+            background-color: #fee2e2;
+            color: #991b1b;
+        }
+
+        .doubt-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .doubt-actions button {
+            padding: 5px 10px;
+            font-size: 12px;
+        }
+
+        .activity-item {
+            padding: 15px 0;
+            border-bottom: 1px solid var(--light-gray);
+        }
+
+        .activity-item:last-child {
+            border-bottom: none;
+        }
+
+        .activity-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+        }
+
+        .activity-title {
+            font-weight: 500;
+        }
+
+        .activity-date {
+            color: var(--gray-color);
+            font-size: 14px;
+        }
+
+        .activity-desc {
+            color: var(--gray-color);
+            font-size: 14px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .form-input, .form-textarea, .form-select {
+            width: 100%;
+            padding: 10px 15px;
+            border: 1px solid var(--light-gray);
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .form-textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .switch-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 24px;
+        }
+
+        .switch input { 
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 24px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 16px;
+            width: 16px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked + .slider {
+            background-color: var(--primary-color);
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(26px);
+        }
+        
+        .ai-explanation-card {
+            border: 1px solid var(--light-gray);
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+
+        .ai-explanation-card h4 {
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+
+        .ai-explanation-card p {
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+
+        .tutor-card {
+            display: flex;
+            padding: 15px;
+            border: 1px solid var(--light-gray);
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+
+        .tutor-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            margin-right: 15px;
+        }
+
+        .tutor-info {
+            flex: 1;
+        }
+
+        .tutor-name {
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .tutor-meta {
+            color: var(--gray-color);
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        .tutor-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .upload-section {
+            margin-top: 20px;
+        }
+
+        .upload-options {
+            display: flex;
+            gap: 15px;
+            margin-top: 10px;
+            flex-wrap: wrap;
+        }
+
+        .upload-option {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+            padding: 15px;
+            border: 1px dashed var(--light-gray);
+            border-radius: 8px;
+            transition: all 0.3s;
+            width: 120px;
+        }
+
+        .upload-option:hover {
+            border-color: var(--primary-color);
+            background-color: rgba(67, 97, 238, 0.05);
+        }
+
+        .upload-icon {
+            font-size: 24px;
+            margin-bottom: 10px;
+            color: var(--primary-color);
+        }
+
+        .upload-label {
+            font-size: 14px;
+            text-align: center;
+        }
+
+        .performance-summary {
+            margin-top: 20px;
+        }
+
+        .subject-progress {
+            margin-top: 15px;
+        }
+
+        .subject-item {
+            margin-bottom: 15px;
+        }
+
+        .subject-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+        }
+
+        .subject-name {
+            font-weight: 500;
+        }
+
+        .subject-value {
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        .language-indicator {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 12px;
+            background-color: #e9f5ff;
+            color: #0077cc;
+            margin-left: 10px;
+        }
+
+        .feedback-stars {
+            display: flex;
+            gap: 5px;
+            margin-top: 5px;
+        }
+
+        .star {
+            color: #ffc107;
+            font-size: 18px;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 3px 8px;
+            font-size: 12px;
+            border-radius: 12px;
+            margin-right: 5px;
+            background-color: #e9ecef;
+            color: #495057;
+        }
+
+        .badge-primary {
+            background-color: #cfe2ff;
+            color: #0d6efd;
+        }
+
+        .badge-success {
+            background-color: #d1e7dd;
+            color: #198754;
+        }
+
+        .recommended-resources {
+            margin-top: 20px;
+            background-color: white;
+        }
+
+        .resource-card {
+            border: 1px solid var(--light-gray);
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+            transition: all 0.3s;
+        }
+
+        .resource-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .resource-title {
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: var(--primary-color);
+        }
+
+        .resource-description {
+            font-size: 14px;
+            color: var(--gray-color);
+            margin-bottom: 10px;
+        }
+
+        .resource-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 12px;
+            color: var(--gray-color);
+        }
+
+        .ai-detail-view {
+            background-color: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .ai-detail-header {
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--light-gray);
+        }
+
+        .ai-detail-title {
+            font-size: 22px;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+
+        .ai-detail-meta {
+            display: flex;
+            gap: 15px;
+            color: var(--gray-color);
+            flex-wrap: wrap;
+        }
+
+        .ai-content {
+            margin-bottom: 20px;
+        }
+
+        .ai-content p {
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+
+        .ai-content img {
+            max-width: 100%;
+            border-radius: 5px;
+            margin: 15px 0;
+        }
+
+        .equation {
+            font-family: 'Times New Roman', Times, serif;
+            text-align: center;
+            margin: 15px 0;
+            font-size: 18px;
+        }
+
+        @media (max-width: 1024px) {
+            .container {
+                padding: 0 10px;
+            }
+
+            .profile-info {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+
+            .profile-avatar {
+                width: 100px;
+                height: 100px;
+            }
+
+            .profile-details {
+                gap: 10px;
+            }
+
+            .profile-stats {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .profile-actions {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .dashboard-grid {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            }
+
+            .tab {
+                padding: 10px 15px;
+                font-size: 14px;
+            }
+
+            .tab-content {
+                padding: 15px 0;
+            }
+
+            .doubt-item {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .doubt-icon {
+                margin-bottom: 10px;
+            }
+
+            .doubt-actions {
+                flex-direction: column;
+                gap: 5px;
+            }
+
+            .tutor-card {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+
+            .tutor-avatar {
+                margin-bottom: 10px;
+            }
+
+            .tutor-actions {
+                flex-direction: column;
+                gap: 5px;
+            }
+
+            .resource-card {
+                padding: 10px;
+            }
+
+            .resource-footer {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 5px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .language-selector {
+                margin-left: 0;
+                margin-top: 10px;
+            }
+
+            .profile-header {
+                padding: 20px;
+            }
+
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .ai-explanation-card {
+                padding: 10px;
+            }
+
+            .subject-item {
+                margin-bottom: 10px;
+            }
+
+            .subject-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .subject-value {
+                margin-top: 5px;
+            }
+
+            .upload-options {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .upload-option {
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo {
+                font-size: 20px;
+            }
+
+            .tab {
+                padding: 8px 10px;
+                font-size: 12px;
+            }
+
+            .card-title {
+                font-size: 14px;
+            }
+
+            .card-value {
+                font-size: 20px;
+            }
+
+            .progress-label span {
+                font-size: 12px;
+            }
+
+            .btn {
+                padding: 6px 15px;
+                font-size: 12px;
+            }
+
+            .doubt-title {
+                font-size: 14px;
+            }
+
+            .doubt-meta {
+                font-size: 12px;
+            }
+
+            .tutor-name {
+                font-size: 14px;
+            }
+
+            .tutor-meta {
+                font-size: 12px;
+            }
+
+            .resource-title {
+                font-size: 14px;
+            }
+
+            .resource-description {
+                font-size: 12px;
+            }
+
+            .resource-footer {
+                font-size: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <div class="logo">Eduboost</div>
+                <div class="language-selector">
+                    <select id="languageSelect">
+                        <option value="en">English</option>
+                        <option value="hi">हिंदी (Hindi)</option>
+                        <option value="ta">தமிழ் (Tamil)</option>
+                        <option value="te">తెలుగు (Telugu)</option>
+                        <option value="bn">বাংলা (Bengali)</option>
+                        <option value="mr">मराठी (Marathi)</option>
+                    </select>
+                </div>
+                <button class="mobile-menu-btn" id="mobileMenuBtn">☰</button>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container profile-container">
+        <div class="profile-header">
+            <div class="profile-info">
+                <img src="/api/placeholder/120/120" alt="Student Profile" class="profile-avatar" id="profileAvatar">
+                <div class="profile-details">
+                    <h1 id="studentName">Priya Sharma</h1>
+                    <div class="profile-id">Student ID: <span id="studentId">EB54321</span> <span class="language-indicator">Hindi</span></div>
+                    <div>Class 11 • Science Stream</div>
+                    <div class="profile-stats">
+                        <div class="stat">
+                            <div class="stat-value" id="doubtsSolved">42</div>
+                            <div class="stat-label">Doubts Solved</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value" id="aiExplanations">38</div>
+                            <div class="stat-label">AI Explanations</div>
+                        </div>
+                    </div>
+                    <div class="profile-actions">
+                        <button class="btn btn-primary" id="askDoubtBtn">Ask New Doubt</button>
+                        <button class="btn btn-outline" id="findTutorBtn">Find a Tutor</button>
+                    </div>
+                </div>
+            </div>
+            <div class="profile-tabs">
+                <div class="tab active" data-tab="dashboard">Dashboard</div>
+                <div class="tab" data-tab="doubts">My Doubts</div>
+                <div class="tab" data-tab="ai-explanations">AI Explanations</div>
+                <div class="tab" data-tab="tutors">Tutors</div>
+                <div class="tab" data-tab="settings">Settings</div>
+            </div>
+        </div>
+        <div class="tab-content active" id="dashboard">
+            <div class="dashboard-grid">
+                <div class="dashboard-card">
+                    <div class="card-title">Doubt Resolution Rate</div>
+                    <div class="card-value">92%</div>
+                    <div class="progress-label">
+                        <span>Resolved</span>
+                        <span>92/100</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress" style="width: 92%;"></div>
+                    </div>
+                </div>
+                <div class="dashboard-card">
+                    <div class="card-title">Pending Doubts</div>
+                    <div class="card-value">3 Unresolved</div>
+                    <div class="progress-label">
+                        <span>Resolved</span>
+                        <span>42/45</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress" style="width: 93%;"></div>
+                    </div>
+                </div>
+                <br><br>
+                <div class="dashboard-card">
+                    <div class="card-title">Tutors Available</div>
+                    <div class="card-value">24 Online</div>
+                    <div>12 for Physics, 8 for Chemistry</div>
+                </div>
+            </div>
+
+            <div class="dashboard-card">
+                <h3>Recent AI Explanations</h3>
+                <div class="ai-explanation-card">
+                    <h4>Projectile Motion Explanation</h4>
+                    <p>The AI explained that the maximum height of a projectile can be calculated using the formula h = v²sin²θ/2g, where v is the initial velocity, θ is the angle of projection, and g is acceleration due to gravity.</p>
+                    <div class="doubt-actions">
+                        <button class="btn btn-outline">Review Again</button>
+                        <button class="btn btn-outline">Share</button>
+                    </div>
+                </div>
+                <div class="ai-explanation-card">
+                    <h4>Chemical Equilibrium Concept</h4>
+                    <p>The AI explained Le Chatelier's principle and how it's applied to predict changes in chemical equilibrium when conditions like temperature, pressure, or concentration are altered.</p>
+                    <div class="doubt-actions">
+                        <button class="btn btn-outline">Review Again</button>
+                        <button class="btn btn-outline">Share</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="recommended-resources">
+                <h3>AI Recommended Resources</h3>
+                <div class="resource-card">
+                    <div class="resource-title">Understanding Wave Optics - Video Tutorial</div>
+                    <div class="resource-description">Based on your recent doubts, this comprehensive tutorial on wave optics covers interference, diffraction, and polarization.</div>
+                    <div class="resource-footer">
+                        <div>Physics • Wave Optics</div>
+                        <div>26 minutes</div>
+                    </div>
+                </div>
+                <div class="resource-card">
+                    <div class="resource-title">Organic Chemistry - Functional Groups Practice Problems</div>
+                    <div class="resource-description">A collection of practice problems to strengthen your understanding of functional groups in organic chemistry.</div>
+                    <div class="resource-footer">
+                        <div>Chemistry • Organic Chemistry</div>
+                        <div>15 problems</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="tab-content" id="doubts">
+            <div class="doubt-list">
+                <h3>My Doubt History</h3>
+                <div id="myDoubts">
+                    <div class="doubt-item">
+                        <div class="doubt-icon">P</div>
+                        <div class="doubt-info">
+                            <div class="doubt-title">Understanding Projectile Motion in 3D Space</div>
+                            <div class="doubt-meta">
+                                <div>Physics</div>
+                                <div>Apr 18, 2025</div>
+                                <div class="doubt-status status-resolved">Resolved</div>
+                                <div><span class="language-indicator">Hindi</span></div>
+                            </div>
+                            <div class="doubt-actions">
+                                <button class="btn btn-outline">View AI Explanation</button>
+                                <button class="btn btn-outline">Find Tutor</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="doubt-item">
+                        <div class="doubt-icon">C</div>
+                        <div class="doubt-info">
+                            <div class="doubt-title">Balancing Redox Reactions in Acidic Medium</div>
+                            <div class="doubt-meta">
+                                <div>Chemistry</div>
+                                <div>Apr 16, 2025</div>
+                                <div class="doubt-status status-resolved">Resolved</div>
+                                <div><span class="language-indicator">Hindi</span></div>
+                            </div>
+                            <div class="doubt-actions">
+                                <button class="btn btn-outline">View AI Explanation</button>
+                                <button class="btn btn-outline">Find Tutor</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="doubt-item">
+                        <div class="doubt-icon">M</div>
+                        <div class="doubt-info">
+                            <div class="doubt-title">Solving Complex Integration Problems</div>
+                            <div class="doubt-meta">
+                                <div>Mathematics</div>
+                                <div>Apr 15, 2025</div>
+                                <div class="doubt-status status-pending">Pending</div>
+                                <div><span class="language-indicator">Hindi</span></div>
+                            </div>
+                            <div class="doubt-actions">
+                                <button class="btn btn-primary">Get AI Explanation</button>
+                                <button class="btn btn-outline">Update Question</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="doubt-item">
+                        <div class="doubt-icon">B</div>
+                        <div class="doubt-info">
+                            <div class="doubt-title">Explaining DNA Replication Process</div>
+                            <div class="doubt-meta">
+                                <div>Biology</div>
+                                <div>Apr 10, 2025</div>
+                                <div class="doubt-status status-resolved">Resolved</div>
+                                <div><span class="language-indicator">Hindi</span></div>
+                            </div>
+                            <div class="doubt-actions">
+                                <button class="btn btn-outline">View AI Explanation</button>
+                                <button class="btn btn-outline">Find Tutor</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="doubt-item">
+                        <div class="doubt-icon">C</div>
+                        <div class="doubt-info">
+                            <div class="doubt-title">Mechanism of Esterification Reaction</div>
+                            <div class="doubt-meta">
+                                <div>Chemistry</div>
+                                <div>Apr 8, 2025</div>
+                                <div class="doubt-status status-resolved">Resolved</div> <div><span class="language-indicator">Hindi</span></div> </div> <div class="doubt-actions"> <button class="btn btn-outline">View AI Explanation</button> <button class="btn btn-outline">Find Tutor</button>
+                            </div> 
+                        </div> 
+                    </div> 
+                </div> 
+            </div> 
+        </div>
+        <div class="tab-content" id="ai-explanations">
+            <div class="ai-explanations">
+                <h3>AI Explanations</h3>
+                <div class="ai-explanation-card">
+                    <h4>Newton's Laws of Motion</h4>
+                    <p>The AI explained the significance of Newton's three laws of motion in understanding the dynamics of objects.</p>
+                    <div class="doubt-actions">
+                        <button class="btn btn-outline">Review Again</button>
+                        <button class="btn btn-outline">Share</button>
+                    </div>
+                </div>
+                <div class="ai-explanation-card">
+                    <h4>Periodic Table Trends</h4>
+                    <p>The AI provided insights into the periodic trends such as ionization energy, electronegativity, and atomic radius.</p>
+                    <div class="doubt-actions">
+                        <button class="btn btn-outline">Review Again</button>
+                        <button class="btn btn-outline">Share</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+        <div class="tab-content" id="tutors">
+            <div class="tutors-list">
+                <h3>Available Tutors</h3>
+                <div class="tutor-card">
+                    <img src="/api/placeholder/60/60" alt="Tutor Avatar" class="tutor-avatar">
+                    <div class="tutor-info">
+                        <div class="tutor-name">Dr. Ramesh Iyer</div>
+                        <div class="tutor-meta">Physics • 10 Years Experience</div>
+                        <div class="tutor-actions">
+                            <button class="btn btn-primary">Schedule Session</button>
+                            <button class="btn btn-outline">View Profile</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="tutor-card">
+                    <img src="/api/placeholder/60/60" alt="Tutor Avatar" class="tutor-avatar">
+                    <div class="tutor-info">
+                        <div class="tutor-name">Ms. Anjali Verma</div>
+                        <div class="tutor-meta">Chemistry • 5 Years Experience</div>
+                        <div class="tutor-actions">
+                            <button class="btn btn-primary">Schedule Session</button>
+                            <button class="btn btn-outline">View Profile</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+        <div class="tab-content" id="performance">
+            <div class="performance-summary">
+                <h3>Performance Summary</h3>
+                <div class="subject-progress">
+                    <div class="subject-item">
+                        <div class="subject-header">
+                            <div class="subject-name">Physics</div>
+                            <div class="subject-value">85%</div>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress" style="width: 85%;"></div>
+                        </div>
+                    </div>
+                    <div class="subject-item">
+                        <div class="subject-header">
+                            <div class="subject-name">Chemistry</div>
+                            <div class="subject-value">78%</div>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress" style="width: 78%;"></div>
+                        </div>
+                    </div>
+                    <div class="subject-item">
+                        <div class="subject-header">
+                            <div class="subject-name">Mathematics</div>
+                            <div class="subject-value">92%</div>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress" style="width: 92%;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+        <div class="tab-content" id="settings">
+            <div class="settings-form">
+                <h3>Settings</h3>
+                <form>
+                    <div class="form-group">
+                        <label for="profilePicture" class="form-label">Profile Picture</label>
+                        <input type="file" id="profilePicture" class="form-input">
+                    </div>
+                    <div class="form-group">
+                        <label for="studentNameInput" class="form-label">Name</label>
+                        <input type="text" id="studentNameInput" class="form-input" value="Priya Sharma">
+                    </div>
+                    <div class="form-group">
+                        <label for="classInput" class="form-label">Class</label>
+                        <input type="text" id="classInput" class="form-input" value="Class 11">
+                    </div>
+                    <div class="form-group">
+                        <label for="languageInput" class="form-label">Preferred Language</label>
+                        <select id="languageInput" class="form-select">
+                            <option value="en">English</option>
+                            <option value="hi" selected>हिंदी (Hindi)</option>
+                            <option value="ta">தமிழ் (Tamil)</option>
+                            <option value="te">తెలుగు (Telugu)</option>
+                            <option value="bn">বাংলা (Bengali)</option>
+                            <option value="mr">मराठी (Marathi)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="notifications" class="form-label">Notifications</label>
+                        <div class="switch-container">
+                            <span>Enable Notifications</span>
+                            <label class="switch">
+                                <input type="checkbox" id="notifications" checked>
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Tab Switching Logic
+        const tabs = document.querySelectorAll('.tab');
+        const tabContents = document.querySelectorAll('.tab-content');
+    
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                tabs.forEach(t => t.classList.remove('active'));
+                tabContents.forEach(tc => tc.classList.remove('active'));
+    
+                tab.classList.add('active');
+                document.querySelector(`#${tab.dataset.tab}`).classList.add('active');
+            });
+        });
+    
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const navLinks = document.getElementById('navLinks');
+    
+        mobileMenuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+    
+        // Language Selector Logic
+        const languageSelect = document.getElementById('languageSelect');
+        languageSelect.addEventListener('change', () => {
+            alert(`Switched to ${languageSelect.options[languageSelect.selectedIndex].text}`);
+        });
+    </script>
+</body>
+</html>
