@@ -1,0 +1,1636 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eduboost - Tutor Profile</title>
+    <style>
+                :root {
+            --primary-color: #4361ee;
+            --secondary-color: #3f37c9;
+            --accent-color: #4895ef;
+            --light-color: #f8f9fa;
+            --dark-color: #212529;
+            --success-color: #4cc9f0;
+            --warning-color: #f72585;
+            --gray-color: #6c757d;
+            --light-gray: #e9ecef;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5;
+            color: var(--dark-color);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        header {
+            background-color: white;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            margin-bottom: 0; /* Ensure no margin below the header */
+            padding-bottom: 0; /* Remove unnecessary padding */
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            margin: 0; /* Remove any default margin */
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--dark-color);
+        }
+
+        .language-selector {
+            display: flex;
+            align-items: center;
+            margin-left: 20px;
+            margin-bottom: 0; /* Ensure no extra space below the language selector */
+        }
+
+        @media (max-width: 768px) {
+            .language-selector {
+            margin-left: 0;
+            margin-top: 10px;
+            width: 100%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .language-selector {
+            flex-direction: column;
+            align-items: flex-start;
+            margin-top: 5px;
+            }
+        }
+
+        .language-selector select {
+            padding: 5px 10px;
+            border-radius: 5px;
+            border: 1px solid var(--light-gray);
+            background-color: white;
+            cursor: pointer;
+        }
+
+        .profile-container {
+            padding: 30px 0;
+            margin: 0%;
+        }
+
+        .profile-header {
+            background-color: white;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .profile-info {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .profile-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid var(--light-gray);
+        }
+
+        .profile-details h1 {
+            font-size: 24px;
+            margin-bottom: 5px;
+        }
+
+        .profile-id {
+            color: var(--gray-color);
+            margin-bottom: 10px;
+        }
+
+        .profile-stats {
+            display: flex;
+            gap: 30px;
+            margin-top: 15px;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 20px;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        .stat-label {
+            font-size: 14px;
+            color: var(--gray-color);
+        }
+
+        .profile-actions {
+            display: flex;
+            gap: 15px;
+            margin-top: 10px;
+        }
+
+        .btn {
+            padding: 8px 20px;
+            border-radius: 5px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 1px solid var(--primary-color);
+            color: var(--primary-color);
+        }
+
+        .btn:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+        }
+
+        .profile-tabs {
+            display: flex;
+            border-bottom: 1px solid var(--light-gray);
+            overflow-x: auto;
+        }
+
+        .tab {
+            padding: 15px 25px;
+            cursor: pointer;
+            font-weight: 500;
+            color: var(--gray-color);
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s;
+            white-space: nowrap;
+        }
+
+        .tab.active {
+            color: var(--primary-color);
+            border-bottom: 3px solid var(--primary-color);
+        }
+
+        .tab-content {
+            display: none;
+            padding: 20px 0;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .dashboard-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .card-title {
+            font-size: 16px;
+            color: var(--gray-color);
+            margin-bottom: 10px;
+        }
+
+        .card-value {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .progress-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+        }
+
+        .progress-bar {
+            height: 8px;
+            background-color: var(--light-gray);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .progress {
+            height: 100%;
+            background-color: var(--primary-color);
+        }
+
+        .doubt-list, .ai-explanations, .tutors-list, .settings-form {
+            background-color: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            margin-bottom: 20px;
+        }
+
+        .doubt-item {
+            display: flex;
+            padding: 15px 0;
+            border-bottom: 1px solid var(--light-gray);
+        }
+
+        .doubt-item:last-child {
+            border-bottom: none;
+        }
+
+        .doubt-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 8px;
+            background-color: var(--light-gray);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            color: var(--primary-color);
+            font-size: 20px;
+        }
+
+        .doubt-info {
+            flex: 1;
+        }
+
+        .doubt-title {
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
+
+        .doubt-meta {
+            display: flex;
+            gap: 15px;
+            color: var(--gray-color);
+            font-size: 14px;
+            flex-wrap: wrap;
+        }
+
+        .doubt-status {
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .status-resolved {
+            background-color: #d1fae5;
+            color: #065f46;
+        }
+
+        .status-pending {
+            background-color: #fee2e2;
+            color: #991b1b;
+        }
+
+        .doubt-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .doubt-actions button {
+            padding: 5px 10px;
+            font-size: 12px;
+        }
+
+        .activity-item {
+            padding: 15px 0;
+            border-bottom: 1px solid var(--light-gray);
+        }
+
+        .activity-item:last-child {
+            border-bottom: none;
+        }
+
+        .activity-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+        }
+
+        .activity-title {
+            font-weight: 500;
+        }
+
+        .activity-date {
+            color: var(--gray-color);
+            font-size: 14px;
+        }
+
+        .activity-desc {
+            color: var(--gray-color);
+            font-size: 14px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .form-input, .form-textarea, .form-select {
+            width: 100%;
+            padding: 10px 15px;
+            border: 1px solid var(--light-gray);
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .form-textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .switch-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 24px;
+        }
+
+        .switch input { 
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 24px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 16px;
+            width: 16px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked + .slider {
+            background-color: var(--primary-color);
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(26px);
+        }
+        
+        .ai-explanation-card {
+            border: 1px solid var(--light-gray);
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+
+        .ai-explanation-card h4 {
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+
+        .ai-explanation-card p {
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+
+        .tutor-card {
+            display: flex;
+            padding: 15px;
+            border: 1px solid var(--light-gray);
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+
+        .tutor-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            margin-right: 15px;
+        }
+
+        .tutor-info {
+            flex: 1;
+        }
+
+        .tutor-name {
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .tutor-meta {
+            color: var(--gray-color);
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        .tutor-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .upload-section {
+            margin-top: 20px;
+        }
+
+        .upload-options {
+            display: flex;
+            gap: 15px;
+            margin-top: 10px;
+            flex-wrap: wrap;
+        }
+
+        .upload-option {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+            padding: 15px;
+            border: 1px dashed var(--light-gray);
+            border-radius: 8px;
+            transition: all 0.3s;
+            width: 120px;
+        }
+
+        .upload-option:hover {
+            border-color: var(--primary-color);
+            background-color: rgba(67, 97, 238, 0.05);
+        }
+
+        .upload-icon {
+            font-size: 24px;
+            margin-bottom: 10px;
+            color: var(--primary-color);
+        }
+
+        .upload-label {
+            font-size: 14px;
+            text-align: center;
+        }
+
+        .performance-summary {
+            margin-top: 20px;
+        }
+
+        .subject-progress {
+            margin-top: 15px;
+        }
+
+        .subject-item {
+            margin-bottom: 15px;
+        }
+
+        .subject-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+        }
+
+        .subject-name {
+            font-weight: 500;
+        }
+
+        .subject-value {
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        .language-indicator {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 12px;
+            background-color: #e9f5ff;
+            color: #0077cc;
+            margin-left: 10px;
+        }
+
+        .feedback-stars {
+            display: flex;
+            gap: 5px;
+            margin-top: 5px;
+        }
+
+        .star {
+            color: #ffc107;
+            font-size: 18px;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 3px 8px;
+            font-size: 12px;
+            border-radius: 12px;
+            margin-right: 5px;
+            background-color: #e9ecef;
+            color: #495057;
+        }
+
+        .badge-primary {
+            background-color: #cfe2ff;
+            color: #0d6efd;
+        }
+
+        .badge-success {
+            background-color: #d1e7dd;
+            color: #198754;
+        }
+
+        .recommended-resources {
+            margin-top: 20px;
+            background-color: white;
+        }
+
+        .resource-card {
+            border: 1px solid var(--light-gray);
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+            transition: all 0.3s;
+        }
+
+        .resource-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .resource-title {
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: var(--primary-color);
+        }
+
+        .resource-description {
+            font-size: 14px;
+            color: var(--gray-color);
+            margin-bottom: 10px;
+        }
+
+        .resource-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 12px;
+            color: var(--gray-color);
+        }
+
+        .ai-detail-view {
+            background-color: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .ai-detail-header {
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--light-gray);
+        }
+
+        .ai-detail-title {
+            font-size: 22px;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+
+        .ai-detail-meta {
+            display: flex;
+            gap: 15px;
+            color: var(--gray-color);
+            flex-wrap: wrap;
+        }
+
+        .ai-content {
+            margin-bottom: 20px;
+        }
+
+        .ai-content p {
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+
+        .ai-content img {
+            max-width: 100%;
+            border-radius: 5px;
+            margin: 15px 0;
+        }
+
+        .equation {
+            font-family: 'Times New Roman', Times, serif;
+            text-align: center;
+            margin: 15px 0;
+            font-size: 18px;
+        }
+
+        .activity-cards {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .activity-card {
+            background-color: white;
+            border-radius: 8px;
+            border: 1px solid var(--light-gray);
+            overflow: hidden;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .activity-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .activity-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 15px;
+            background-color: var(--light-color);
+            border-bottom: 1px solid var(--light-gray);
+        }
+
+        .activity-type {
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        .activity-time {
+            font-size: 0.85rem;
+            color: var(--gray-color);
+        }
+
+        .activity-card-content {
+            padding: 15px;
+        }
+
+        .activity-card-content h4 {
+            margin-bottom: 8px;
+            color: var(--dark-color);
+        }
+
+        .activity-card-content p {
+            color: var(--gray-color);
+            font-size: 0.9rem;
+            margin-bottom: 12px;
+        }
+
+        .activity-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+
+        .tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            padding: 4px 8px;
+            background-color: var(--light-color);
+            border-radius: 4px;
+            font-size: 0.8rem;
+            color: var(--gray-color);
+        }
+
+        .activity-feedback {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 12px;
+            border-top: 1px solid var(--light-gray);
+        }
+
+        .rating {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .stars {
+            color: #ffd700;
+        }
+
+        .rating-value {
+            font-weight: 600;
+            color: var(--dark-color);
+        }
+
+        .student-feedback {
+            font-style: italic;
+            color: var(--gray-color);
+            font-size: 0.9rem;
+        }
+
+        /* Active Doubts Styles */
+        .doubt-card {
+            border: 1px solid var(--light-gray);
+            border-radius: 8px;
+            margin-bottom: 15px;
+            padding: 15px;
+            transition: transform 0.2s ease;
+        }
+
+        .doubt-status-badge {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .doubt-status-badge.urgent {
+            background-color: #fff3cd;
+            color: #856404;
+        }
+
+        .doubt-status-badge.new {
+            background-color: #cfe2ff;
+            color: #084298;
+        }
+
+        .doubt-status-badge.success {
+            background-color: #d1e7dd;
+            color: #0f5132;
+        }
+
+        .student-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .student-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+        }
+
+        /* Reviews Styles */
+        .rating-summary {
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        .large-rating {
+            font-size: 48px;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        .review-card {
+            padding: 15px;
+            border-bottom: 1px solid var(--light-gray);
+        }
+
+        /* Earnings Styles */
+        .earnings-summary {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .earnings-stat-card {
+            background-color: var(--light-color);
+            padding: 15px;
+            border-radius: 8px;
+        }
+
+        .stat-trend.positive {
+            color: #198754;
+        }
+
+        .stat-trend.neutral {
+            color: var(--gray-color);
+        }
+
+        .transaction-card {
+            padding: 15px;
+            border-bottom: 1px solid var(--light-gray);
+        }
+
+        .transaction-amount.positive {
+            color: #198754;
+            font-weight: 600;
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .earnings-summary {
+                grid-template-columns: 1fr;
+            }
+
+            .review-card {
+                padding: 10px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .activity-feedback {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 8px;
+            }
+
+            .activity-tags {
+                margin-bottom: 8px;
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .container {
+                padding: 0 10px;
+            }
+
+            .profile-info {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+
+            .profile-avatar {
+                width: 100px;
+                height: 100px;
+            }
+
+            .profile-details {
+                gap: 10px;
+            }
+
+            .profile-stats {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .profile-actions {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .dashboard-grid {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            }
+
+            .tab {
+                padding: 10px 15px;
+                font-size: 14px;
+            }
+
+            .tab-content {
+                padding: 15px 0;
+            }
+
+            .doubt-item {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .doubt-icon {
+                margin-bottom: 10px;
+            }
+
+            .doubt-actions {
+                flex-direction: column;
+                gap: 5px;
+            }
+
+            .tutor-card {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+
+            .tutor-avatar {
+                margin-bottom: 10px;
+            }
+
+            .tutor-actions {
+                flex-direction: column;
+                gap: 5px;
+            }
+
+            .resource-card {
+                padding: 10px;
+            }
+
+            .resource-footer {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 5px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .language-selector {
+                margin-left: 0;
+                margin-top: 10px;
+            }
+
+            .profile-header {
+                padding: 20px;
+            }
+
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .ai-explanation-card {
+                padding: 10px;
+            }
+
+            .subject-item {
+                margin-bottom: 10px;
+            }
+
+            .subject-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .subject-value {
+                margin-top: 5px;
+            }
+
+            .upload-options {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .upload-option {
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo {
+                font-size: 20px;
+            }
+
+            .tab {
+                padding: 8px 10px;
+                font-size: 12px;
+            }
+
+            .card-title {
+                font-size: 14px;
+            }
+
+            .card-value {
+                font-size: 20px;
+            }
+
+            .progress-label span {
+                font-size: 12px;
+            }
+
+            .btn {
+                padding: 6px 15px;
+                font-size: 12px;
+            }
+
+            .doubt-title {
+                font-size: 14px;
+            }
+
+            .doubt-meta {
+                font-size: 12px;
+            }
+
+            .tutor-name {
+                font-size: 14px;
+            }
+
+            .tutor-meta {
+                font-size: 12px;
+            }
+
+            .resource-title {
+                font-size: 14px;
+            }
+
+            .resource-description {
+                font-size: 12px;
+            }
+
+            .resource-footer {
+                font-size: 10px;
+            }
+        }
+
+        /* Add styles for loading indicator and error message */
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid rgba(255, 255, 255, 0.3);
+            border-top: 5px solid white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .error-message {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #f8d7da;
+            color: #721c24;
+            padding: 10px 20px;
+            border: 1px solid #f5c6cb;
+            border-radius: 5px;
+            z-index: 10000;
+            font-size: 14px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <div class="logo">Eduboost</div>
+                <div class="language-selector">
+                    <select id="languageSelect">
+                        <option value="en">English</option>
+                        <option value="hi">हिंदी (Hindi)</option>
+                        <option value="ta">தமிழ் (Tamil)</option>
+                        <option value="te">తెలుగు (Telugu)</option>
+                        <option value="bn">বাংলা (Bengali)</option>
+                        <option value="mr">मराठी (Marathi)</option>
+                    </select>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <div id="loadingIndicator" class="loading-overlay" style="display: none;">
+        <div class="spinner"></div>
+    </div>
+    <div id="errorContainer" class="error-message" style="display: none;"></div>
+
+    <div class="container profile-container">
+        <div class="profile-header">
+            <div class="profile-info">
+                <img src="/api/placeholder/120/120" alt="Tutor Profile" class="profile-avatar" id="profileAvatar">
+                <div class="profile-details">
+                    <h1 id="tutorName">Dr. Ramesh Iyer</h1>
+                    <div class="profile-id">Tutor ID: <span id="tutorId">TEB12345</span></div>
+                    <div class="expertise-badges">
+                        <span class="badge badge-primary">Physics Expert</span>
+                        <span class="badge badge-success">Hindi</span>
+                        <span class="badge badge-success">English</span>
+                    </div>
+                    <div>PhD in Physics • Teaching Since 2015</div>
+                    <div class="profile-stats">
+                        <div class="stat">
+                            <div class="stat-value" id="doubtsResolved">1,234</div>
+                            <div class="stat-label">Doubts Resolved</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value" id="rating">4.9</div>
+                            <div class="stat-label">Average Rating</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value" id="languages">3</div>
+                            <div class="stat-label">Languages</div>
+                        </div>
+                    </div>
+                    <div class="profile-actions">
+                        <button class="btn btn-primary" id="toggleAvailability">Go Online</button>
+                        <button class="btn btn-outline" id="viewAnalytics">View Analytics</button>
+                    </div>
+                </div>
+            </div>
+            <div class="profile-tabs">
+                <div class="tab active" data-tab="dashboard">Dashboard</div>
+                <div class="tab" data-tab="active-doubts">Active Doubts</div>
+                <div class="tab" data-tab="resolved">Resolved</div>
+                <div class="tab" data-tab="reviews">Reviews</div>
+                <div class="tab" data-tab="earnings">Earnings</div>
+                <div class="tab" data-tab="settings">Settings</div>
+            </div>
+        </div>
+
+        <!-- Dashboard Tab -->
+        <div class="tab-content active" id="dashboard">
+            <div class="dashboard-grid">
+                <div class="dashboard-card">
+                    <div class="card-title">Today's Stats</div>
+                    <div class="card-value">15 Doubts</div>
+                    <div class="progress-label">
+                        <span>Resolved</span>
+                        <span>12/15</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress" style="width: 80%;"></div>
+                    </div>
+                </div>
+                <div class="dashboard-card">
+                    <div class="card-title">Response Rate</div>
+                    <div class="card-value">98%</div>
+                    <div class="progress-label">
+                        <span>Average Response Time: 2 mins</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress" style="width: 98%;"></div>
+                    </div>
+                </div>
+                <div class="dashboard-card">
+                    <div class="card-title">Current Status</div>
+                    <div class="card-value">Online</div>
+                    <div>Available for Doubts</div>
+                </div>
+            </div>
+
+            <!-- Live Doubts -->
+            <div class="dashboard-card">
+                <h3>Live Doubts</h3>
+                <div class="doubt-card">
+                    <div class="doubt-header">
+                        <div class="doubt-type">Physics • Wave Optics</div>
+                        <div class="doubt-time">2 mins ago</div>
+                    </div>
+                    <div class="doubt-content">
+                        <p>Need help understanding interference patterns in Young's double-slit experiment</p>
+                        <div class="doubt-attachments">
+                            <span class="attachment-badge">📷 Image</span>
+                            <span class="attachment-badge">🎤 Voice Note</span>
+                        </div>
+                    </div>
+                    <div class="doubt-actions">
+                        <button class="btn btn-primary">Accept & Solve</button>
+                        <button class="btn btn-outline">View Details</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Activity -->
+            <div class="dashboard-card">
+                <h3>Recent Activity</h3>
+                <div class="activity-cards">
+                    <div class="activity-card">
+                        <div class="activity-card-header">
+                            <div class="activity-type">Doubt Resolved</div>
+                            <div class="activity-time">Just now</div>
+                        </div>
+                        <div class="activity-card-content">
+                            <h4>Quantum Mechanics: Wave Functions</h4>
+                            <p>Explained Schrödinger equation and its applications in quantum systems</p>
+                            <div class="activity-tags">
+                                <span class="tag"><i class="fas fa-language"></i> Hindi</span>
+                                <span class="tag"><i class="fas fa-video"></i> Video</span>
+                                <span class="tag"><i class="fas fa-desktop"></i> Screen Share</span>
+                            </div>
+                            <div class="activity-feedback">
+                                <div class="rating">
+                                    <span class="stars">★★★★★</span>
+                                    <span class="rating-value">5.0</span>
+                                </div>
+                                <div class="student-feedback">"Excellent explanation!"</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="activity-card">
+                        <div class="activity-card-header">
+                            <div class="activity-type">Doubt Solved</div>
+                            <div class="activity-time">2 hours ago</div>
+                        </div>
+                        <div class="activity-card-content">
+                            <h4>Optics: Interference Patterns</h4>
+                            <p>Explained Young's double-slit experiment with interactive diagrams</p>
+                            <div class="activity-tags">
+                                <span class="tag"><i class="fas fa-language"></i> English</span>
+                                <span class="tag"><i class="fas fa-image"></i> Image</span>
+                                <span class="tag"><i class="fas fa-microphone"></i> Voice</span>
+                            </div>
+                            <div class="activity-feedback">
+                                <div class="rating">
+                                    <span class="stars">★★★★★</span>
+                                    <span class="rating-value">4.9</span>
+                                </div>
+                                <div class="student-feedback">"Very clear explanation with visuals"</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="activity-card">
+                        <div class="activity-card-header">
+                            <div class="activity-type">AI Assistance Used</div>
+                            <div class="activity-time">3 hours ago</div>
+                        </div>
+                        <div class="activity-card-content">
+                            <h4>Thermodynamics: Heat Engines</h4>
+                            <p>Used Groq AI to enhance explanation with step-by-step solution</p>
+                            <div class="activity-tags">
+                                <span class="tag"><i class="fas fa-language"></i> Marathi</span>
+                                <span class="tag"><i class="fas fa-robot"></i> AI Enhanced</span>
+                                <span class="tag"><i class="fas fa-pen"></i> Text</span>
+                            </div>
+                            <div class="activity-feedback">
+                                <div class="rating">
+                                    <span class="stars">★★★★★</span>
+                                    <span class="rating-value">4.8</span>
+                                </div>
+                                <div class="student-feedback">"AI helped understand complex concepts"</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Active Doubts Tab Content -->
+        <div class="tab-content" id="active-doubts">
+            <div class="doubts-container">
+                <!-- Live Doubts Section -->
+                <div class="dashboard-card">
+                    <div class="card-header">
+                        <h3>Live Doubts (3 Active)</h3>
+                        <div class="filter-options">
+                            <select class="form-select">
+                                <option>All Subjects</option>
+                                <option>Physics</option>
+                                <option>Chemistry</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="doubt-card active-doubt">
+                        <div class="doubt-status-badge urgent">Live - 2m</div>
+                        <div class="doubt-content">
+                            <div class="student-info">
+                                <img src="/api/placeholder/40/40" alt="Student" class="student-avatar">
+                                <div class="student-details">
+                                    <h4>Aditya P.</h4>
+                                    <span class="language-tag">Hindi</span>
+                                </div>
+                            </div>
+                            <h4>Electromagnetic Induction Problem</h4>
+                            <p>Need help solving this problem about Faraday's law and induced EMF calculation...</p>
+                            <div class="attachment-preview">
+                                <span class="attachment-icon">📷</span>
+                                <span class="attachment-name">problem_image.jpg</span>
+                            </div>
+                            <div class="doubt-meta">
+                                <span><i class="fas fa-book"></i> Physics • Class 12</span>
+                                <span><i class="fas fa-clock"></i> Started at 21:04:47</span>
+                            </div>
+                            <div class="doubt-actions">
+                                <button class="btn btn-primary">Continue Solving</button>
+                                <button class="btn btn-outline">End Session</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="doubt-card pending-doubt">
+                        <div class="doubt-status-badge new">New</div>
+                        <div class="doubt-content">
+                            <div class="student-info">
+                                <img src="/api/placeholder/40/40" alt="Student" class="student-avatar">
+                                <div class="student-details">
+                                    <h4>Riya S.</h4>
+                                    <span class="language-tag">English</span>
+                                </div>
+                            </div>
+                            <h4>Wave Optics Conceptual Doubt</h4>
+                            <p>Confusion regarding interference patterns in Young's double-slit experiment...</p>
+                            <div class="attachment-preview">
+                                <span class="attachment-icon">🎤</span>
+                                <span class="attachment-name">voice_note.mp3</span>
+                            </div>
+                            <div class="doubt-meta">
+                                <span><i class="fas fa-book"></i> Physics • Class 11</span>
+                                <span><i class="fas fa-clock"></i> Waiting since 21:05:30</span>
+                            </div>
+                            <div class="doubt-actions">
+                                <button class="btn btn-primary">Accept Doubt</button>
+                                <button class="btn btn-outline">View Details</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Resolved Tab Content -->
+        <div class="tab-content" id="resolved">
+            <div class="resolved-container">
+                <div class="dashboard-card">
+                    <div class="card-header">
+                        <h3>Resolved Doubts - April 2025</h3>
+                        <div class="stats-summary">
+                            <span class="stat-item">
+                                <strong>42</strong> doubts resolved
+                            </span>
+                            <span class="stat-item">
+                                <strong>4.9</strong> avg. rating
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="doubt-card resolved">
+                        <div class="doubt-status-badge success">Resolved Today</div>
+                        <div class="doubt-content">
+                            <h4>Quantum Mechanics: Wave Functions</h4>
+                            <p>Explained Schrödinger equation and probability density...</p>
+                            <div class="resolution-details">
+                                <div class="resolution-meta">
+                                    <span><i class="fas fa-clock"></i> 2025-04-17 19:30:22</span>
+                                    <span><i class="fas fa-stopwatch"></i> 28 minutes</span>
+                                    <span><i class="fas fa-star"></i> 5.0</span>
+                                </div>
+                                <div class="interaction-methods">
+                                    <span class="method-tag">Screen Share</span>
+                                    <span class="method-tag">Voice</span>
+                                    <span class="method-tag">AI Assisted</span>
+                                </div>
+                            </div>
+                            <div class="student-feedback">
+                                "Excellent explanation! The visual representation really helped understand the concept."
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Reviews Tab Content -->
+        <div class="tab-content" id="reviews">
+            <div class="reviews-container">
+                <div class="dashboard-card">
+                    <div class="card-header">
+                        <h3>Student Reviews</h3>
+                        <div class="rating-summary">
+                            <div class="overall-rating">
+                                <span class="large-rating">4.9</span>
+                                <div class="stars">★★★★★</div>
+                                <span class="total-reviews">from 1,234 reviews</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="review-card">
+                        <div class="review-header">
+                            <div class="student-info">
+                                <img src="/api/placeholder/40/40" alt="Student" class="student-avatar">
+                                <div>
+                                    <h4>Rahul K.</h4>
+                                    <div class="review-meta">
+                                        <span>2025-04-17 20:45:12</span>
+                                        <span>Physics</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="rating">★★★★★ 5.0</div>
+                        </div>
+                        <p class="review-text">"Dr. Iyer's explanation of quantum mechanics was exceptional. The way he used analogies and visual aids made complex concepts easy to understand."</p>
+                        <div class="doubt-tags">
+                            <span class="tag">Quantum Mechanics</span>
+                            <span class="tag">Screen Share</span>
+                            <span class="tag">Hindi</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Earnings Tab Content -->
+        <div class="tab-content" id="earnings">
+            <div class="earnings-container">
+                <div class="dashboard-card">
+                    <div class="card-header">
+                        <h3>Earnings Overview</h3>
+                        <div class="date-filter">
+                            <select class="form-select">
+                                <option>April 2025</option>
+                                <option>March 2025</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="earnings-summary">
+                        <div class="earnings-stat-card">
+                            <div class="stat-label">Monthly Earnings</div>
+                            <div class="stat-value">₹45,280</div>
+                            <div class="stat-trend positive">↑ 12% vs last month</div>
+                        </div>
+                        <div class="earnings-stat-card">
+                            <div class="stat-label">Doubts Resolved</div>
+                            <div class="stat-value">156</div>
+                            <div class="stat-trend positive">↑ 8% vs last month</div>
+                        </div>
+                        <div class="earnings-stat-card">
+                            <div class="stat-label">Avg. per Doubt</div>
+                            <div class="stat-value">₹290</div>
+                            <div class="stat-trend neutral">↔ Same as last month</div>
+                        </div>
+                    </div>
+
+                    <div class="recent-earnings">
+                        <h4>Recent Transactions</h4>
+                        <div class="transaction-card">
+                            <div class="transaction-info">
+                                <div class="transaction-details">
+                                    <h5>Physics Doubt Session</h5>
+                                    <span>2025-04-17 20:45:12</span>
+                                </div>
+                                <div class="transaction-amount positive">+₹350</div>
+                            </div>
+                            <div class="transaction-meta">
+                                <span>Duration: 35 mins</span>
+                                <span>Student: Aditya P.</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Settings Tab -->
+        <div class="tab-content" id="settings">
+            <div class="settings-form">
+                <h3>Profile Settings</h3>
+                <form>
+                    <div class="form-group">
+                        <label for="profilePicture" class="form-label">Profile Picture</label>
+                        <input type="file" id="profilePicture" class="form-input">
+                    </div>
+                    <div class="form-group">
+                        <label for="tutorNameInput" class="form-label">Name</label>
+                        <input type="text" id="tutorNameInput" class="form-input" value="Dr. Ramesh Iyer">
+                    </div>
+                    <div class="form-group">
+                        <label for="qualificationInput" class="form-label">Qualification</label>
+                        <input type="text" id="qualificationInput" class="form-input" value="PhD in Physics">
+                    </div>
+                    <div class="form-group">
+                        <label for="languages" class="form-label">Teaching Languages</label>
+                        <div class="checkbox-group">
+                            <label><input type="checkbox" checked> English</label>
+                            <label><input type="checkbox" checked> हिंदी (Hindi)</label>
+                            <label><input type="checkbox" checked> मराठी (Marathi)</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="subjects" class="form-label">Subjects</label>
+                        <div class="checkbox-group">
+                            <label><input type="checkbox" checked> Physics</label>
+                            <label><input type="checkbox"> Chemistry</label>
+                            <label><input type="checkbox"> Mathematics</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Preferred Doubt Format</label>
+                        <div class="checkbox-group">
+                            <label><input type="checkbox" checked> Text</label>
+                            <label><input type="checkbox" checked> Image</label>
+                            <label><input type="checkbox" checked> Audio</label>
+                            <label><input type="checkbox" checked> Video</label>
+                            <label><input type="checkbox" checked> Screen Share</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="notifications" class="form-label">Notifications</label>
+                        <div class="switch-container">
+                            <span>Receive New Doubt Alerts</span>
+                            <label class="switch">
+                                <input type="checkbox" id="notifications" checked>
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+       // Tab Switching Logic
+       const tabs = document.querySelectorAll('.tab');
+        const tabContents = document.querySelectorAll('.tab-content');
+    
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                tabs.forEach(t => t.classList.remove('active'));
+                tabContents.forEach(tc => tc.classList.remove('active'));
+    
+                tab.classList.add('active');
+                document.querySelector(`#${tab.dataset.tab}`).classList.add('active');
+            });
+        });
+    
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const navLinks = document.getElementById('navLinks');
+    
+        mobileMenuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+    
+        // Language Selector Logic
+        const languageSelect = document.getElementById('languageSelect');
+        languageSelect.addEventListener('change', () => {
+            alert(`Switched to ${languageSelect.options[languageSelect.selectedIndex].text}`);
+        });
+    </script>
+    <script src="app.js" type="module"></script>
+</body>
+</html>
